@@ -1,5 +1,9 @@
 from django.shortcuts import render
+from django.http import HttpResponse
 from bookworm.books_api import search_query
+
+def index(request):
+        return HttpResponse("Welcome!")
 
 def search(request):
 	result_list = []

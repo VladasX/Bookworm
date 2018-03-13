@@ -1,5 +1,5 @@
 """
-WSGI config for Bookworm project.
+WSGI config for wad2_project project.
 
 It exposes the WSGI callable as a module-level variable named ``application``.
 
@@ -11,6 +11,6 @@ import os
 
 from django.core.wsgi import get_wsgi_application
 
-os.environ.setdefault("DJANGO_SETTINGS_MODULE", "Bookworm.settings")
+os.environ.setdefault("DJANGO_SETTINGS_MODULE", "wad2_project.settings")
 
 application = get_wsgi_application()

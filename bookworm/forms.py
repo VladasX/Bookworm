@@ -10,6 +10,9 @@ class UserForm(forms.ModelForm):
         fields = ("username", "email", "password")
 
 class UserProfileForm(forms.ModelForm):
-    class Meta:
-        model = UserProfile
-        fields = ("bio", "picture")
+	bio = forms.CharField(required=False)
+	picture = forms.ImageField(required=False)
+
+	class Meta:
+		model = UserProfile
+		exclude = ('user',)

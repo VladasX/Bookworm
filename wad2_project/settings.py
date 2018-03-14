@@ -15,6 +15,8 @@ import os
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 TEMPLATE_DIR = os.path.join(BASE_DIR, "templates")
+STATIC_DIR = os.path.join(BASE_DIR, "static")
+MEDIA_DIR = os.path.join(BASE_DIR, "media")
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/1.11/howto/deployment/checklist/
@@ -34,10 +36,9 @@ ACCOUNT_ACTIVATION_DAYS = 7
 # If True, the user will be automatically logged in.
 REGISTRATION_AUTO_LOGIN = True
 # The page you want users to arrive at after they successfully log in
-LOGIN_REDIRECT_URL = '/search/'
+LOGIN_REDIRECT_URL = '/index/'
 # The page users are directed to if they are not logged in,
 # and are trying to access pages requiring authentication
-
 LOGIN_URL = '/bookworm/accounts/login/'
 
 # Application definition
@@ -134,8 +135,11 @@ USE_L10N = True
 
 USE_TZ = True
 
+MEDIA_ROOT = MEDIA_DIR
+MEDIA_URL = "/media/"
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/1.11/howto/static-files/
 
+STATICFILES_DIRS = [STATIC_DIR, ]
 STATIC_URL = '/static/'

@@ -2,18 +2,11 @@ import json
 import urllib.parse
 import urllib.request
 
-#Register for an API key via Google.
-books_api_key = ""
-
 def search_query(search_terms, orderBy="relevance", ):
 	"""
 	Given a string containing search terms (search_terms), and an optional order by,
 	returns a list of results from the Google Books API.
 	"""
-
-	if not books_api_key:
-	    raise KeyError('API key not found')
-
 
 	#Base URL for Google Books API.
 	root_url = 'https://www.googleapis.com/books/v1/volumes?q='
@@ -22,11 +15,10 @@ def search_query(search_terms, orderBy="relevance", ):
 	query_string = urllib.parse.quote(search_terms)
 
 	#Format the string.
-	search_url = '{root_url}{query}&orderBy={orderBy}&key={API_Key}'.format(
+	search_url = '{root_url}{query}&orderBy={orderBy}'.format(
 	                root_url=root_url,
 	                query='+'.join(search_terms.split(" ")),
-	                orderBy=orderBy,
-	                API_Key=books_api_key)
+	                orderBy=orderBy)
 
 	results = []
 
@@ -83,10 +75,6 @@ def book_query(book_id):
 	Given a book ID, returns details of the book from the Google Books API.
 	"""
 
-	if not books_api_key:
-	    raise KeyError('API key not found')
-
-
 	#Base URL for Google Books API.
 	root_url = 'https://www.googleapis.com/books/v1/volumes/'
 
@@ -94,10 +82,9 @@ def book_query(book_id):
 	query_string = urllib.parse.quote(book_id)
 
 	#Format the string.
-	search_url = '{root_url}{book_id}?key={API_Key}'.format(
+	search_url = '{root_url}{book_id}'.format(
 	                root_url=root_url,
-	                book_id=book_id,
-	                API_Key=books_api_key)
+	                book_id=book_id)
 	try:
 	    #Connect to the Google Books API, and convert the response to a Python dictionary.
 		response = urllib.request.urlopen(search_url).read().decode('utf-8')

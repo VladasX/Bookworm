@@ -29,7 +29,7 @@
 			{% if user.is_authenticated %}
 			Welcome back 
 			<!-- Link to a user's profile -->
-			<a href="#" style="color:#32CD32">{{ user.username }}</a>
+			<a href="/profile/{{ user.username }}" style="color:#32CD32">{{ user.username }}</a>
 			{% else %}
 			Welcome guest!
 			<a href="{% url 'registration_register' %}" style="color:#32CD32">Register</a>
@@ -62,7 +62,7 @@
               <a class="nav-link" href="#">Make a New Review</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="#">Profile</a>
+              <a class="nav-link" href="/profile/{{ user.username }}">Profile</a>
             </li>
             <li class="nav-item">
               <a class="nav-link" href="{% url 'auth_logout' %}?next=/">Logout</a>

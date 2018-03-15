@@ -27,9 +27,11 @@
           <div class="col-4 d-flex justify-content-end align-items-center">
             <div class="welcome">
 			{% if user.is_authenticated %}
-			Welcome, {{ user.username }}!
+			Welcome back 
+			<!-- Link to a user's profile -->
+			<a href="#" style="color:#32CD32">{{ user.username }}</a>
 			{% else %}
-			Welcome, guest!
+			Welcome guest!
 			<a href="{% url 'registration_register' %}" style="color:#32CD32">Register</a>
 			 or 
 			<a href="{% url 'auth_login' %}" style="color:#32CD32">Login</a>

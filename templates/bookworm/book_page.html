@@ -1,7 +1,15 @@
-<!--This is only a temp book html, to be changed later by someone.-->
-<h2><img style="float: left;" src="{{ book_data.thumbnail }}"></h2>
-<h1>{{ book_data.title }} by {{ book_data.authors }}</h1>
-<p>Description: {{ book_data.description }}</p>
-<p>ISBN: {{ book_data.isbn }}</p>
-<p>Average Rating: {{ book_data.averageRating }}</p>
+ <!--This is only a temp book html, to be changed later by someone.-->
+{% extends "bookworm/base.html" %}
+
+{% block title_block %}
+	Book page
+{% endblock %}
+
+{% block body_block %}
+ <h2><img style="float: left;" src="{{ book_data.thumbnail }}"></h2>
+ <h1>{{ book_data.title }} by {{ book_data.authors }}</h1>
+ <p>Description: {{ book_data.description }}</p>
+ <p>ISBN: {{ book_data.isbn }}</p>
+ <p>Average Rating: {{ book_data.averageRating }}</p>
 <p>Publisher: {{ book_data.publisher }}, Published Date: {{ book_data.publishedDate }}</p>
+{% endblock %}

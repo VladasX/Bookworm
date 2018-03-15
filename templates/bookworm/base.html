@@ -18,6 +18,29 @@
 
   <body>
 
+	<div class="container">
+      <header class="blog-header py-3">
+        <div class="row flex-nowrap justify-content-between align-items-center">
+          <div class="col-4 pt-1">
+            <img src="{% static "images/logo.png" %}" alt="Bookworm logo" style="width:60%;height:60%"> 
+          </div>
+          <div class="col-4 d-flex justify-content-end align-items-center">
+            <div class="welcome">
+			{% if user.is_authenticated %}
+			Welcome, {{ user.username }}!
+			{% else %}
+			Welcome, guest!
+			<a href="{% url 'registration_register' %}" style="color:#32CD32">Register</a>
+			 or 
+			<a href="{% url 'auth_login' %}" style="color:#32CD32">Login</a>
+			{% endif %}
+			</div>
+          </div>
+        </div>
+    </header>
+
+  
+  
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
       <div class="container">
         <a class="navbar-brand" href="/">Bookworm</a>
@@ -29,6 +52,9 @@
             <li class="nav-item">
               <a class="nav-link" href="#">Books</a>
             </li>
+            <li class="nav-item">
+              <a class="nav-link" href="#">FAQ</a>
+            </li>
 		{% if user.is_authenticated %}
             <li class="nav-item">
               <a class="nav-link" href="#">Make a New Review</a>
@@ -39,17 +65,7 @@
             <li class="nav-item">
               <a class="nav-link" href="{% url 'auth_logout' %}?next=/">Logout</a>
             </li>
-        {% else %}
-            <li class="nav-item">
-              <a class="nav-link" href="{% url 'registration_register' %}">Register Here</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="{% url 'auth_login' %}">Login</a>
-            </li>
         {% endif %}
-            <li class="nav-item">
-              <a class="nav-link" href="#">FAQ</a>
-            </li>
           </ul>
           <form class="form-inline my-2 my-md-0">
             <input class="form-control" type="text" placeholder="Search" aria-label="Search">

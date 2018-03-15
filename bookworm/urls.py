@@ -11,6 +11,8 @@ class MyRegistrationView(RegistrationView):
 
 urlpatterns = [
     url(r'^$', views.index, name='index'),
+    url(r'^index/$', views.index, name='index'),
+    url(r'^home/$', views.index, name='index'),
     url(r'^search/$', views.search, name='search'),
     url(r'^search/(?P<book_id>[\w\-]+)/$', views.book_page, name='book_page'),
     url(r'^accounts/register/$', MyRegistrationView.as_view(), name='registration_register'),

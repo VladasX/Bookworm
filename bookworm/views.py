@@ -25,7 +25,7 @@ def book_page(request, book_id):
 	book_data = book_query(book_id)
 	if book_data:
 		return render(request, 'bookworm/book_page.html', {'book_data': book_data})
-	return HttpResponse("Error, book not found.")
+	return render(request, 'bookworm/error.html')
 
 #Displays a user's profile and allows them to edit it if it's theirs.
 @login_required

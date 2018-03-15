@@ -1,8 +1,7 @@
-<!--This is only a temp search html, to be changed later.-->
 {% extends "bookworm/base.html" %}
-
+{% load staticfiles %}
 {% block title_block %}
-	Registration
+	Login
 {% endblock %}
 
 {% block body_block %}
@@ -14,8 +13,10 @@
 	{% csrf_token %}
 	<div class="input-group">
 		<input class="form-control" type="text" size="50" 
-			name="query" value="" id="query" />
+			name="query" placeholder="Enter a book's title" value="" id="query" />
 	</div>
+	<!-- No breaking space -->
+	&nbsp;
 	<button class="btn btn-primary" type="submit" name="submit"
 		 value="Search">Search</button>
 	</form>	
@@ -29,7 +30,9 @@
 			<h4 class="list-group-item-heading">
 			<a href="/book/{{ result.bookid }}">{{ result.title }}</a>
 			</h4> 
-			<p class="list-group-item-text"><img src="{{ result.smallThumbnail }}">{{ result.description }}</p>
+			<p class="list-group-item-text"><img src="{{ result.smallThumbnail }}">
+			<!-- br tag in order to separate thumbnail from description -->
+			<br>{{ result.description }}</p>
 			</div>
 		{% endfor %}
 		</div>

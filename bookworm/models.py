@@ -16,7 +16,7 @@ class Book(models.Model):
 	author = models.CharField(max_length=128),
 	publisher = models.CharField(max_length=256),
 	publishedDate = models.CharField(max_length=256),
-	thumbnail = models.CharField(max_length=2000)
+	thumbnail = models.URLField(max_length=2000)
 	description = models.TextField(max_length=4096, blank=True),
 	linkid = models.CharField(max_length=256), #Uses the Google page ID instead of the ISBN since not all results via the API seem to return an ISBN.
 	averageRating = models.FloatField(max_length=5)

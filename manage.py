@@ -2,7 +2,9 @@
 import os
 import sys
 
-if __name__ == "__main__":
+if sys.version_info[0] < 3:
+    print("Must be using Python 3 to run this.")
+elif __name__ == "__main__":
     os.environ.setdefault("DJANGO_SETTINGS_MODULE", "wad2_project.settings")
     try:
         from django.core.management import execute_from_command_line

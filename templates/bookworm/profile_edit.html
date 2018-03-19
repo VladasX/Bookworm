@@ -5,6 +5,7 @@
 {% endblock %}
 
 {% block body_block %}
+{% if selecteduser.username == user.username %}
 <h1>{{selecteduser.username}}'s Profile</h1>
 <div class="row">
 	{% if userprofile.picture %}
@@ -18,9 +19,20 @@
 		</div>
 	{% endif %}
 	<div class="col">
+		{% if selecteduser.username == user.username %}
+			<form method="post" action="." enctype="multipart/form-data">
+				{% csrf_token %}
+				{{ form.as_p }}
+				<input type="submit" value="Update" />
+			</form>
+		{% else %}
 		<p><strong>Bio:</strong> <a "{{ userprofile.bio}}">
 			{{userprofile.bio}}</a></p>
+		{% endif %}
 	</div>
 	<div id="edit_profile"></div>
 </div>
+{% else %}
+<p>You can not edit someone else's profile</p>
+{% endif %}
 {% endblock %}

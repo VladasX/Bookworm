@@ -27,9 +27,23 @@ def book_page(request, book_id):
 		return render(request, 'bookworm/book_page.html', {'book_data': book_data})
 	return render(request, 'bookworm/error.html')
 
-#Displays a user's profile and allows them to edit it if it's theirs.
-@login_required
+#Displays a user's profile.
+
 def profile(request, username):
+	try:
+		user = User.objects.get(username=username)
+	except User.DoesNotExist:
+		return redirect('index')
+	userprofile = UserProfile.objects.get_or_create(user=user)[0]
+	form = UserProfileForm(
+		{'bio': userprofile.bio, 'picture': userprofile.picture})
+	return render(request, 'bookworm/profile.html',
+		{'userprofile': userprofile, 'selecteduser': user, 'form': form})
+
+#Displays a user's profile and allows them to edit it if it's theirs.
+
+@login_required
+def profile_edit(request, username):
 	try:
 		user = User.objects.get(username=username)
 	except User.DoesNotExist:
@@ -41,8 +55,8 @@ def profile(request, username):
 		form = UserProfileForm(request.POST, request.FILES, instance=userprofile)
 		if form.is_valid():
 			form.save(commit=True)
-			return redirect('profile', user.username)
+			return redirect('profile_edit', user.username)
 		else:
 			print(form.errors)
-	return render(request, 'bookworm/profile.html',
+	return render(request, 'bookworm/profile_edit.html',
 		{'userprofile': userprofile, 'selecteduser': user, 'form': form})

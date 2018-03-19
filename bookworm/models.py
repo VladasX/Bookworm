@@ -18,7 +18,7 @@ class Book(models.Model):
 	publishedDate = models.CharField(max_length=256),
 	thumbnail = models.URLField(max_length=2000)
 	description = models.TextField(max_length=4096, blank=True),
-	linkid = models.CharField(max_length=256), #Uses the Google page ID instead of the ISBN since not all results via the API seem to return an ISBN.
+	linkid = models.CharField(primary_key=True, max_length=256), #Uses the Google page ID instead of the ISBN since not all results via the API seem to return an ISBN.
 	averageRating = models.FloatField(max_length=5)
 
 	def __str__(self):
@@ -30,5 +30,3 @@ class Review(models.Model):
 	user = models.ForeignKey(UserProfile),
 	date = models.DateField(auto_now_add=True),
 	text = models.TextField(max_length=4096)
-
-#class BookList(models.Model):

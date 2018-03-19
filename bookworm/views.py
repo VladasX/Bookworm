@@ -28,7 +28,6 @@ def book_page(request, book_id):
 	return render(request, 'bookworm/error.html')
 
 #Displays a user's profile.
-
 def profile(request, username):
 	try:
 		user = User.objects.get(username=username)
@@ -41,7 +40,6 @@ def profile(request, username):
 		{'userprofile': userprofile, 'selecteduser': user, 'form': form})
 
 #Displays a user's profile and allows them to edit it if it's theirs.
-
 @login_required
 def profile_edit(request, username):
 	try:

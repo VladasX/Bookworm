@@ -14,80 +14,80 @@
     <link href="http://getbootstrap.com/dist/css/bootstrap.min.css" rel="stylesheet">
     <!-- Custom styles for this template -->
     <link href="{% static "css/base.css" %}" rel="stylesheet">
-	<link href="{% static "css/bw.css" %}" rel="stylesheet">
   </head>
 
   <body>
-    <div class="header">
-		<a class="headerE" href="{% url 'index' %}">Home<span class="sr-only">(current)</span></a>
-		<a class="headerE" href="#">Books</a>
-		<div class="headerE">
-			<form class="searchBar" id="user_form" 
+
+	<div class="container">
+      <header class="blog-header py-3">
+        <div class="row flex-nowrap justify-content-between align-items-center">
+          <div class="col-4 pt-1">
+            <img src="{% static "images/logo.png" %}" alt="Bookworm logo" style="width:150%;height:150%"> 
+          </div>
+          <div class="col-4 d-flex justify-content-end align-items-center">
+            <div class="welcome">
+			{% if user.is_authenticated %}
+			Welcome back 
+			<!-- Link to a user's profile -->
+			<a href="/profile/{{ user.username }}" style="color:#32CD32">{{ user.username }}</a>
+			{% else %}
+			Welcome guest!
+			<a href="{% url 'registration_register' %}" style="color:#32CD32">Register</a>
+			 or 
+			<a href="{% url 'auth_login' %}" style="color:#32CD32">Login</a>
+			{% endif %}
+			</div>
+          </div>
+        </div>
+    </header>
+
+  
+  
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+      <div class="container">
+        <div class="collapse navbar-collapse" id="navbarsExample07">
+          <ul class="navbar-nav mr-auto" style="font-size:130%;">
+            <li class="nav-item active">
+              <a class="nav-link" href="{% url 'index' %}">Home<span class="sr-only">(current)</span></a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="{% url 'book_list' %}">Books</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="#">FAQ</a>
+            </li>
+		{% if user.is_authenticated %}
+            <li class="nav-item">
+              <a class="nav-link" href="#">Make a New Review</a>
+            </li>
+			<li class="nav-item dropdown">
+				<a class="nav-link dropdown-toggle" href="/profile/{{ user.username }}" id="dropdown01" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Account</a>
+            <div class="dropdown-menu" aria-labelledby="dropdown01">
+				<a class="dropdown-item" href="/profile/{{ user.username }}">View your profile</a>
+				<a class="dropdown-item" href="/profile_edit/{{ user.username }}">Edit your profile</a>
+				<a class="dropdown-item" href="{% url 'auth_password_change' %}">Change your password</a>
+            </div>
+			</li>
+            <li class="nav-item">
+              <a class="nav-link" href="{% url 'auth_logout' %}?next=/">Logout</a>
+            </li>
+        {% endif %}
+          </ul>
+			<form class="form-inline" id="user_form" 
 				method="post" action="{% url 'search' %}">
 				{% csrf_token %}
 				<div class="input-group">
 					<input class="form-control" type="text"
 						name="query" placeholder="Search..." value="" id="query" />
 				</div>
-			</form>
-		</div>
-			{% if user.is_authenticated %}
-			<!-- Link to a user's profile -->
-			<a class="headerE" href="/profile/{{ user.username }}" style="float: right">{{ user.username }}</a>
-			{% else %}
-			<div style="float: right">
-			<a class="headerE"  href="{% url 'registration_register' %}" style="float: right">Register</a>
-			<a class="headerE"  href="{% url 'auth_login' %}" style="float: right">Login</a>
-			</div>
-			{% endif %}
-		
-	</div>
-	<div class="headerShadow">
-	</div>
-	
-	
-	
-	<div class="header2">
-		<img src="{% static "images/logo.png" %}" alt="Bookworm logo" class="headerE"> 
-	
-	</div>
-	
+			</form>	
+        </div>
+      </div>
+    </nav>
 	
 	<div class="main">
          {% block body_block %}{% endblock %}
     </div>
-	
-	<div class="footer">
-	<table class="footerTable">
-		<tr>
-			<th class = "fontFooterTitle">BookWorm</th>
-			<th class = "fontFooterTitle">Terms of Service</th>
-			<th class = "fontFooterTitle">About Us</th>
-		</tr>
-		<tr>
-			<th ><a class="fontFooter" href="/">Home</a></th>
-			<th class = "fontFooter">Terms of Use</th>
-			<th class = "fontFooter">Contact us</th>
-			
-		</tr>
-		<tr>
-			<th class = "fontFooter">News</th>
-			<th class = "fontFooter"></th>
-			<th class = "fontFooter"></th>
-			
-		</tr>
-		<tr>
-			<th class = "fontFooter">FAQ</th>
-			<th class = "fontFooter"></th>
-			<th class = "fontFooter"></th>
-			
-		</tr>
-	</table>
-		
-	<div class="footerFooter"></div>
-	
-	</div>
-
 	
 	<!-- Bootstrap core JavaScript
 	================================================== -->

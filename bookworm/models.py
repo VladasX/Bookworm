@@ -12,21 +12,23 @@ class UserProfile(models.Model):
 
 #Model for books stored.
 class Book(models.Model):
-	title = models.CharField(max_length=256),
-	author = models.CharField(max_length=128),
-	publisher = models.CharField(max_length=256),
-	publishedDate = models.CharField(max_length=256),
-	thumbnail = models.URLField(max_length=2000)
-	description = models.TextField(max_length=4096, blank=True),
-	linkid = models.CharField(primary_key=True, max_length=256), #Uses the Google page ID instead of the ISBN since not all results via the API seem to return an ISBN.
-	averageRating = models.FloatField(max_length=5)
+	bookid = models.CharField(primary_key=True, max_length=256) #Uses the Google page ID instead of the ISBN since not all results via the API seem to return an ISBN.
+	title = models.CharField(max_length=256, null=True)
+	authors = models.CharField(max_length=128, null=True)
+	publisher = models.CharField(max_length=256, null=True)
+	publishedDate = models.CharField(max_length=256, null=True)
+	description = models.TextField(max_length=4096, null=True)
+	isbn = models.CharField(max_length=40, null=True)
+	averageRating = models.FloatField(max_length=2) #We'll use our own ratings instead of Google Book's.
+	thumbnail = models.URLField(max_length=2000, null=True)
+	textSnippet = models.TextField(max_length=2000, null=True)
 
 	def __str__(self):
-		return self.title, self.author, self.publisher, self.publishedDate, self.description, self.linkid, self.averageRating
+		return self.bookid, self.title, self.authors, self.publisher, self.publishedDate, self.description, self.isbn, self.averageRating, self.thumbnail, self.textSnippet
 
 #Model for reviews stored.
 class Review(models.Model):
-	book = models.ForeignKey(Book),
-	user = models.ForeignKey(UserProfile),
-	date = models.DateField(auto_now_add=True),
+	book = models.ForeignKey(Book)
+	user = models.ForeignKey(UserProfile)
+	date = models.DateField(auto_now_add=True)
 	text = models.TextField(max_length=4096)

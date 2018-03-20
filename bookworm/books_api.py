@@ -1,6 +1,7 @@
 import json
 import urllib.parse
 import urllib.request
+from bookworm.models import Book
 
 def search_query(search_terms, orderBy="relevance", ):
 	"""
@@ -52,8 +53,8 @@ def search_query(search_terms, orderBy="relevance", ):
 			if "searchInfo" in post and "textSnippet" in post["searchInfo"]:
 				textSnippet = post['searchInfo']['textSnippet']
 
-			results.append({'title': title,
-							'bookid': linkurl,
+			results.append({'bookid': linkurl,
+							'title': title,
 			                'authors': authors,
 			                'publisher': publisher,
 			                'publishedDate': publishedDate,
@@ -64,8 +65,12 @@ def search_query(search_terms, orderBy="relevance", ):
 			                'thumbnail': thumbnail,
 			                'textSnippet': textSnippet
 			                 })
+
+			if not Book.objects.filter(bookid=linkurl).exists():
+				Book.objects.create(bookid=linkurl, title=title, authors=authors, publisher=publisher, publishedDate=publishedDate, description=description, isbn=isbn, averageRating=0, thumbnail=thumbnail, textSnippet=textSnippet)
+
 	except:
-		print("Error when querying the Google Books API")
+		print("Error when querying the Google Books API.")
 
     #Return the list of results to the calling function.
 	return results
@@ -114,22 +119,23 @@ def book_query(book_id):
 		if "searchInfo" in post and "textSnippet" in post["searchInfo"]:
 			textSnippet = post['searchInfo']['textSnippet']
 
-		result = {'title': title,
-				'bookid': linkurl,
-                'authors': authors,
-                'publisher': publisher,
-                'publishedDate': publishedDate,
-                'description': description,
-                'isbn': isbn,
-                'averageRating': averageRating,
-                'smallThumbnail': smallThumbnail,
-                'thumbnail': thumbnail,
-                'textSnippet': textSnippet
-                 }
+		results =  {'bookid': linkurl,
+					'title': title,
+		            'authors': authors,
+		            'publisher': publisher,
+		            'publishedDate': publishedDate,
+		            'description': description,
+	                'isbn': isbn,
+	                'averageRating': averageRating,
+	                'smallThumbnail': smallThumbnail,
+	                'thumbnail': thumbnail,
+	                'textSnippet': textSnippet
+	                 }
+
          #Return the results to the calling function.
 		return result
 	except:
-		print("Error when querying the Google Books API")
+		print("Error when querying the Google Books API.")
 
     
 	

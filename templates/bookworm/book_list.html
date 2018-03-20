@@ -1,0 +1,25 @@
+<!--TEMP BOOK LIST PAGE-->
+
+{% extends "bookworm/base.html" %}
+
+{% block title_block %}
+	Book List
+{% endblock %}
+
+{% block body_block %}
+	<h1>Temp book list page.</h1>
+	{% if books %}
+		{% for book in books %}
+			<div class="list-group-item">
+			<h4 class="list-group-item-heading">
+			<a href="/book/{{ book.bookid }}">{{ book.title }}</a>
+			</h4> 
+			<p class="list-group-item-text"><img src="{{ book.thumbnail }}">
+			<!-- br tag in order to separate thumbnail from description -->
+			<br>{{ book.description }}</p>
+			</div>
+		{% endfor %}
+	{% else %}
+		No books have been added yet, please search for books to populate this list.
+	{% endif %}
+{% endblock %}

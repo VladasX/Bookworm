@@ -4,8 +4,8 @@ from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
 from django.core.urlresolvers import reverse
 from django.contrib.auth.models import User
-from bookworm.books_api import search_query, book_query
-from bookworm.models import UserProfile
+from bookworm.books_api import search_query
+from bookworm.models import UserProfile, Book, Review
 from bookworm.forms import UserForm, UserProfileForm
 
 def index(request):
@@ -21,11 +21,18 @@ def search(request):
 	return render(request, 'bookworm/search.html', {'result_list': result_list})
 
 #Gets data about a specific book and displays it.
-def book_page(request, book_id):
-	book_data = book_query(book_id)
+def book_page(request, bookid):
+	book_data = Book.objects.get(bookid=bookid)
 	if book_data:
 		return render(request, 'bookworm/book_page.html', {'book_data': book_data})
 	return render(request, 'bookworm/error.html')
+
+#Displays a list of books that are stored in the database.
+def book_list(request): #Maybe add the ability to allow them to sort the list.
+	context_dict = {}
+	books = Book.objects.order_by("averageRating")
+	context_dict["books"] = books
+	return render(request, "bookworm/book_list.html", context_dict)
 
 #Displays a user's profile.
 def profile(request, username):

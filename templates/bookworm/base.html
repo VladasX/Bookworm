@@ -57,9 +57,6 @@
               <a class="nav-link" href="#">FAQ</a>
             </li>
 		{% if user.is_authenticated %}
-            <li class="nav-item">
-              <a class="nav-link" href="#">Make a New Review</a>
-            </li>
 			<li class="nav-item dropdown">
 				<a class="nav-link dropdown-toggle" href="/profile/{{ user.username }}" id="dropdown01" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Account</a>
             <div class="dropdown-menu" aria-labelledby="dropdown01">

@@ -6,6 +6,7 @@ class UserProfile(models.Model):
 	user = models.OneToOneField(User, primary_key=True)
 	bio = models.CharField(max_length=2000, blank=True)
 	picture = models.ImageField(upload_to='profile_images', blank=True)
+	favouriteBook = models.ForeignKey(Book, blank=true)
 
 	def __str__(self):
 		return self.user.username

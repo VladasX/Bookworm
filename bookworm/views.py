@@ -6,7 +6,7 @@ from django.core.urlresolvers import reverse
 from django.contrib.auth.models import User
 from bookworm.books_api import search_query
 from bookworm.models import UserProfile, Book, Review
-from bookworm.forms import UserForm, UserProfileForm
+from bookworm.forms import UserForm, UserProfileForm, ReviewForm
 
 def index(request):
 	return render(request, 'bookworm/index.html')
@@ -23,8 +23,9 @@ def search(request):
 #Gets data about a specific book and displays it.
 def book_page(request, bookid):
 	book_data = Book.objects.get(bookid=bookid)
+	reviews = Review.objects.filter(book_id=book_data.bookid)
 	if book_data:
-		return render(request, 'bookworm/book_page.html', {'book_data': book_data})
+		return render(request, 'bookworm/book_page.html', {'book_data': book_data, 'reviews': reviews})
 	return render(request, 'bookworm/error.html')
 
 #Displays a list of books that are stored in the database.
@@ -33,6 +34,30 @@ def book_list(request): #Maybe add the ability to allow them to sort the list.
 	books = Book.objects.order_by("averageRating")
 	context_dict["books"] = books
 	return render(request, "bookworm/book_list.html", context_dict)
+
+#Allows a user to add a review for a book.
+@login_required
+def add_review(request, bookid):
+	try:
+		user = User.objects.get(username=request.user.username)
+	except User.DoesNotExist:
+		return redirect('index')
+	try:
+		book = Book.objects.get(bookid=bookid)
+	except Book.DoesNotExist:
+		return redirect('index')
+	form = ReviewForm()
+	if request.method == 'POST':
+		form = ReviewForm(request.POST)
+		if form.is_valid():
+			book_review = Review.objects.get_or_create(user=request.user, book=book)[0]
+			book_review.text = form.cleaned_data['text']
+			book_review.save()
+			reviews = Review.objects.filter(book_id=book.bookid)
+			return render(request, 'bookworm/book_page.html', {'book_data': book, 'reviews': reviews})
+		else:
+			print(form.errors)
+	return render(request, 'bookworm/add_review.html', {'form': form})
 
 #Displays a user's profile.
 def profile(request, username):
@@ -46,7 +71,7 @@ def profile(request, username):
 	return render(request, 'bookworm/profile.html',
 		{'userprofile': userprofile, 'selecteduser': user, 'form': form})
 
-#Displays a user's profile and allows them to edit it if it's theirs.
+#Allows them to edit their user profile.
 @login_required
 def profile_edit(request, username):
 	try:

@@ -1,0 +1,21 @@
+<!--TEMP ADD REVIEW PAGE-->
+{% extends "bookworm/base.html" %}
+
+{% block title_block %}
+	Add Review
+{% endblock %}
+
+{% block body_block %}
+<h1>Temp add review page.</h1>
+<div class="container">
+	<form role="form"  method="post">
+		{% csrf_token %}
+		<div class="form-group" >
+		<p class="required"><label class="required" for="id_text">Review:</label>
+			<input class="form-control" id="id_text"" name="text" type="text" />
+		</p>
+	</div>
+		<button type="submit">Submit</button>
+	</form>
+</div>
+{% endblock %}

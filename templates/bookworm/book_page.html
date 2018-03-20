@@ -7,10 +7,16 @@
 
 {% block body_block %}
 <h1>Temp book page.</h1>
- <h2><img style="float: left;" src="{{ book_data.thumbnail }}"></h2>
- <h1>{{ book_data.title }} by {{ book_data.authors }}</h1>
- <p>Description: {{ book_data.description }}</p>
- <p>ISBN: {{ book_data.isbn }}</p>
- <p>Average Rating: {{ book_data.averageRating }}</p>
+<h2><img style="float: left;" src="{{ book_data.thumbnail }}"></h2>
+<h1>{{ book_data.title }} by {{ book_data.authors }}</h1>
+<p>Description: {{ book_data.description }}</p>
+<p>ISBN: {{ book_data.isbn }}</p>
+<p>Average Rating: {{ book_data.averageRating }}</p>
 <p>Publisher: {{ book_data.publisher }}, Published Date: {{ book_data.publishedDate }}</p>
+<a href="review/" class="btn btn-default">Add a review.</a>
+{% if reviews %}
+	{% for review in reviews %}
+		<p>{{ review.text }}</p>
+	{% endfor %}
+{% endif %}
 {% endblock %}

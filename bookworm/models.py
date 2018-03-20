@@ -25,7 +25,7 @@ class Book(models.Model):
 
 #Model for reviews stored.
 class Review(models.Model):
+	user = models.ForeignKey(User)
 	book = models.ForeignKey(Book)
-	user = models.ForeignKey(UserProfile)
+	text = models.TextField(max_length=4096, null=True)
 	date = models.DateField(auto_now_add=True)
-	text = models.TextField(max_length=4096)

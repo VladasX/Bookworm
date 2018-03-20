@@ -1,4 +1,4 @@
 Django==1.11.7
-pillow
 django-registration-redux==1.4
+pillow
 bcrypt

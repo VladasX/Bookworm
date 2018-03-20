@@ -28,4 +28,4 @@ class Review(models.Model):
 	user = models.ForeignKey(User)
 	book = models.ForeignKey(Book)
 	text = models.TextField(max_length=4096, null=True)
-	date = models.DateField(auto_now_add=True)
+	timestamp = models.DateTimeField(auto_now=True)

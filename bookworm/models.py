@@ -1,16 +1,6 @@
 from django.db import models
 from django.contrib.auth.models import User
 
-#Model for user profile.
-class UserProfile(models.Model):
-	user = models.OneToOneField(User, primary_key=True)
-	bio = models.CharField(max_length=2000, blank=True)
-	picture = models.ImageField(upload_to='profile_images', blank=True)
-	favouriteBook = models.ForeignKey(Book, blank=true)
-
-	def __str__(self):
-		return self.user.username
-
 #Model for books stored.
 class Book(models.Model):
 	bookid = models.CharField(primary_key=True, max_length=256) #Uses the Google page ID instead of the ISBN since not all results via the API seem to return an ISBN.
@@ -31,3 +21,13 @@ class Review(models.Model):
 	book = models.ForeignKey(Book)
 	text = models.TextField(max_length=4096, null=True)
 	timestamp = models.DateTimeField(auto_now=True)
+
+#Model for user profile.
+class UserProfile(models.Model):
+	user = models.OneToOneField(User, primary_key=True)
+	bio = models.CharField(max_length=2000, blank=True)
+	picture = models.ImageField(upload_to='profile_images', blank=True)
+	favouriteBook = models.ForeignKey(Book, null=True)
+
+	def __str__(self):
+		return self.user.username

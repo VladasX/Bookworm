@@ -67,10 +67,10 @@ def search_query(search_terms, orderBy="relevance", ):
 			                 })
 
 			if not Book.objects.filter(bookid=linkurl).exists():
-				Book.objects.create(bookid=linkurl, title=title, authors=authors, publisher=publisher, publishedDate=publishedDate, description=description, isbn=isbn, averageRating=0, thumbnail=thumbnail, textSnippet=textSnippet)
+				Book.objects.create(bookid=linkurl, title=title, authors=authors, publisher=publisher, publishedDate=publishedDate, description=description, isbn=isbn, averageRating=0, thumbnail=thumbnail, textSnippet=textSnippet, pageViews=0)
 
 		#Return the list of results to the calling function.
 		return results
-		
+
 	except:
 		print("Error when querying the Google Books API.")

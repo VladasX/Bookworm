@@ -25,6 +25,8 @@ def book_page(request, bookid):
 	book_data = Book.objects.get(bookid=bookid)
 	reviews = Review.objects.filter(book_id=book_data.bookid)
 	if book_data:
+		book_data.pageViews = (book_data.pageViews+1)
+		book_data.save()
 		return render(request, 'bookworm/book_page.html', {'book_data': book_data, 'reviews': reviews})
 	return render(request, 'bookworm/error.html')
 

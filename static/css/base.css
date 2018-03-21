@@ -24,3 +24,13 @@ h1 {
   padding: 10px 20px 10px 20px;
   text-decoration: none;
 }
+
+#owl-demo .item{
+  margin: 3px;
+}
+
+.carousel .item img{
+  display: block;
+  width: 100%;
+  height: auto;
+}

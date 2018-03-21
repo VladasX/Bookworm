@@ -14,6 +14,9 @@
     <link href="{% static "css/bootstrap.min.css" %}" rel="stylesheet">
     <!-- Custom styles for this template -->
     <link href="{% static "css/base.css" %}" rel="stylesheet">
+	<!-- Bootstrap 4.0 breaks slider in index -->
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap-theme.min.css">
   </head>
 
   <body>
@@ -21,10 +24,10 @@
 	<div class="container">
       <header class="blog-header py-3">
         <div class="row flex-nowrap justify-content-between align-items-center">
-          <div class="col-4 pt-1">
+          <div class="col-4 pt-1 ">
             <img src="{% static "images/logo.png" %}" alt="Bookworm logo" style="width:150%;height:150%"> 
           </div>
-          <div class="col-4 d-flex justify-content-end align-items-center">
+          <div class="col-8 d-flex justify-content-end align-items-center">
             <div class="welcome">
 			{% if user.is_authenticated %}
 			Welcome back 
@@ -46,7 +49,8 @@
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
       <div class="container">
         <div class="collapse navbar-collapse" id="navbarsExample07">
-          <ul class="navbar-nav mr-auto" style="font-size:130%;">
+		<div class="col-md-4 pt-1">
+          <ul class="navbar-nav mr-auto" style="font-size:150%;">
             <li class="nav-item active">
               <a class="nav-link" href="{% url 'index' %}">Home<span class="sr-only">(current)</span></a>
             </li>
@@ -70,6 +74,9 @@
             </li>
         {% endif %}
           </ul>
+		  </div>
+		  <!--- pt = padding-top --->
+		  <div class="col-md-8 pt-3 d-flex justify-content-end align-items-center">
 			<form class="form-inline" id="user_form" 
 				method="post" action="{% url 'book_search' %}">
 				{% csrf_token %}
@@ -78,6 +85,7 @@
 						name="query" placeholder="Search..." value="" id="query" />
 				</div>
 			</form>	
+			</div>
         </div>
       </div>
     </nav>
@@ -89,9 +97,6 @@
 	<!-- Bootstrap core JavaScript
 	================================================== -->
 	<!-- Placed at the end of the document so the pages load faster -->
-	<script
-	src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js">
-	</script>
 	<!-- Bootstrap bundle needed for dropdown buttons in books list page which includes Popper.js -->
 	<script
 	src="{% static "js/bootstrap.bundle.min.js" %}">
@@ -102,5 +107,8 @@
 	</script>
 	<script src="{% static "js/bookworm-ajax.js" %}"></script>
     <script src="{% static "js/bookworm-jquery.js" %}"></script>
+	<!-- Don't move this to the top or else stuff breaks -->
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
   </body>
 </html>

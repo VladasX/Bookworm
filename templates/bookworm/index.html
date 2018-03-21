@@ -8,20 +8,98 @@
 {% block body_block %}
 {% if highest_rated %}
 	<h1>Highest Rated:</h1>
-	{% for book in highest_rated %}
-		<p><strong>{{ book.title }}:</strong> {{ book.averageRating }}</p>
-	{% endfor %}
+	<div class="row">   
+		<div id="carouselBooks1" class="carousel slide" data-ride="carousel">
+			<div class="carousel-inner">         
+				<div class="item active">
+				{% for book in highest_rated %}
+					<div class="col-sm-3">
+						<img src="{{ book.thumbnail }}"/>
+						<center><h4><b><a href="/book/{{ book.bookid }}">{{ book.title }}</a></b></h4></center>
+					</div>
+				   {% if forloop.counter|divisibleby:4 and not forloop.last %}
+				   </div>
+				   <div class="item">
+				   {% endif %}
+				{% endfor %}
+				</div>  
+			</div>
+			<a class="carousel-control-prev" href="#carouselBooks1" role="button" data-slide="prev">
+				<span class="carousel-control-prev-icon" aria-hidden="true"></span>
+				<span class="sr-only">Previous</span>
+			</a>
+			<a class="carousel-control-next" href="#carouselBooks1" role="button" data-slide="next">
+				<span class="carousel-control-next-icon" aria-hidden="true"></span>
+				<span class="sr-only">Next</span>
+			</a>
+		</div>
+	</div>
+{% else %}
+	<h2>There are currently books in the database</h2>
 {% endif %}
+
 {% if most_viewed %}
 	<h1>Most Viewed:</h1>
-	{% for book in most_viewed %}
-		<p><strong>{{ book.title }}:</strong> {{ book.pageViews }}</p>
-	{% endfor %}
+	<div class="row">   
+		<div id="carouselBooks2" class="carousel slide" data-ride="carousel">
+			<div class="carousel-inner">         
+				<div class="item active">
+				{% for book in most_viewed %}
+					<div class="col-sm-3">
+						<img src="{{ book.thumbnail }}"/>
+						<center><h4><b><a href="/book/{{ book.bookid }}">{{ book.title }}</a></b></h4></center>
+					</div>
+				   {% if forloop.counter|divisibleby:4 and not forloop.last %}
+				   </div>
+				   <div class="item">
+				   {% endif %}
+				{% endfor %}
+				</div>  
+			</div>
+			<a class="carousel-control-prev" href="#carouselBooks2" role="button" data-slide="prev">
+				<span class="carousel-control-prev-icon" aria-hidden="true"></span>
+				<span class="sr-only">Previous</span>
+			</a>
+			<a class="carousel-control-next" href="#carouselBooks2" role="button" data-slide="next">
+				<span class="carousel-control-next-icon" aria-hidden="true"></span>
+				<span class="sr-only">Next</span>
+			</a>
+		</div>
+	</div>
+{% else %}
+	<h2>There are currently books in the database</h2>
 {% endif %}
+
 {% if recent_reviewed %}
-	<h1>Most recently reviewed:</h1>
-	{% for review in recent_reviewed %}
-		<p><strong>{{ review.book.title }}:</strong> {{ review.text }}</p>
-	{% endfor %}
+	<h1>Latest reviews:</h1>
+	<div class="row">   
+		<div id="carouselBooks3" class="carousel slide" data-ride="carousel">
+			<div class="carousel-inner">         
+				<div class="item active">
+				{% for book in recent_reviewed %}
+					<div class="col-sm-3">
+						<img src="{{ book.thumbnail }}"/>
+						<center><h4><b><a href="/book/{{ book.bookid }}">{{ book.title }}</a></b></h4></center>
+					</div>
+				   {% if forloop.counter|divisibleby:4 and not forloop.last %}
+				   </div>
+				   <div class="item">
+				   {% endif %}
+				{% endfor %}
+				</div>  
+			</div>
+			<a class="carousel-control-prev" href="#carouselBooks3" role="button" data-slide="prev">
+				<span class="carousel-control-prev-icon" aria-hidden="true"></span>
+				<span class="sr-only">Previous</span>
+			</a>
+			<a class="carousel-control-next" href="#carouselBooks3" role="button" data-slide="next">
+				<span class="carousel-control-next-icon" aria-hidden="true"></span>
+				<span class="sr-only">Next</span>
+			</a>
+		</div>
+	</div>
+{% else %}
+	<h2>There are currently no reviews</h2>
 {% endif %}
+
 {% endblock %}

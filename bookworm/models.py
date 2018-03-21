@@ -13,8 +13,9 @@ class Book(models.Model):
 	averageRating = models.FloatField(max_length=2) #We'll use our own ratings instead of Google Book's.
 	thumbnail = models.URLField(max_length=2000, null=True)
 	textSnippet = models.TextField(max_length=2000, null=True)
+	pageCount = models.IntegerField(null=True)
 	pageViews = models.IntegerField()
-	pageCount = models.IntegerField()
+
 
 #Model for reviews stored.
 class Review(models.Model):

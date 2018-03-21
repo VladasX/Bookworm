@@ -18,7 +18,7 @@ def search(request):
 		query = request.POST['query'].strip()
 		if query:
 			result_list = search_query(query)
-	return render(request, 'bookworm/search.html', {'result_list': result_list})
+	return render(request, 'bookworm/book_search.html', {'result_list': result_list})
 
 #Gets data about a specific book and displays it.
 def book_page(request, bookid):

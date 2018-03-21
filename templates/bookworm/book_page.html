@@ -19,13 +19,15 @@
 		<p><b>ISBN:</b> {{ book_data.isbn }}</p>
 		<p><b>Publisher:</b> {{ book_data.publisher }}</p>
 		<p><b>Date Published</b>: {{ book_data.publishedDate }}</p>
-		<a href="review/" class="btn btn-secondary">Make a review</a>
+		{% if user.is_authenticated %}
+			<a href="review/" class="btn btn-secondary">Write a review</a>
+		{% endif %}
 		</font>
 	</div>
 </div>
 {% if reviews %}
 	{% for review in reviews %}
-		<p>{{ review.text }}</p>
+		<p><strong>{{ review.user.username }}:</strong> {{ review.text }}</p>
 	{% endfor %}
 {% endif %}
 {% endblock %}

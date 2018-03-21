@@ -8,11 +8,15 @@ from bookworm.books_api import search_query
 from bookworm.models import UserProfile, Book, Review
 from bookworm.forms import UserForm, UserProfileForm, ReviewForm
 
+#Displays home page.
 def index(request):
-	return render(request, 'bookworm/index.html')
+	highest_rated = Book.objects.order_by("-averageRating")[:4]
+	most_viewed = Book.objects.order_by("-pageViews")[:4]
+	recent_reviewed = Review.objects.order_by("-timestamp")[:4]
+	return render(request, 'bookworm/index.html', {'highest_rated': highest_rated, 'most_viewed': most_viewed, 'recent_reviewed': recent_reviewed})
 
 #Gets a list of books based on a user's query and displays it.
-def search(request):
+def book_search(request):
 	result_list = []
 	if request.method == 'POST':
 		query = request.POST['query'].strip()

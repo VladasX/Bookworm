@@ -1,10 +1,27 @@
-	{% extends 'bookworm/base.html' %}
-	{% load staticfiles %}
-	{% block title_block %}
-		Home
-	{% endblock %}
-	
-	{% block body_block %}
+<!--TEMP INDEX PAGE-->
+{% extends 'bookworm/base.html' %}
+{% load staticfiles %}
+{% block title_block %}
+	Home
+{% endblock %}
 
-	{% endblock %}
-	
+{% block body_block %}
+{% if highest_rated %}
+	<h1>Highest Rated:</h1>
+	{% for book in highest_rated %}
+		<p><strong>{{ book.title }}:</strong> {{ book.averageRating }}</p>
+	{% endfor %}
+{% endif %}
+{% if most_viewed %}
+	<h1>Most Viewed:</h1>
+	{% for book in most_viewed %}
+		<p><strong>{{ book.title }}:</strong> {{ book.pageViews }}</p>
+	{% endfor %}
+{% endif %}
+{% if recent_reviewed %}
+	<h1>Most recently reviewed:</h1>
+	{% for review in recent_reviewed %}
+		<p><strong>{{ review.book.title }}:</strong> {{ review.text }}</p>
+	{% endfor %}
+{% endif %}
+{% endblock %}

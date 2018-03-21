@@ -6,11 +6,11 @@
 
 {% block body_block %}
 <div class="row">
-	<div class="col-auto">
-		<img style="float: left;" src="{{ book_data.thumbnail }}">
-		<center><p><b>Avg. Rating:</b> {{ book_data.averageRating }}</p></center>
+	<div class="col-4">
+		<img style="float: left; width:100%" src="{{ book_data.thumbnail }}">
+		<center><p><font size="4"><b>Average Rating:</b> {{ book_data.averageRating }}</font> </p></center>
 	</div>
-	<div class="col">
+	<div class="col-8">
 		<h2>{{ book_data.title }} by {{ book_data.authors }}</h2><br>
 		<font size="4">
 		<p><b>Author(s)</b>: {{ book_data.authors }}</p>

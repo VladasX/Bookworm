@@ -15,8 +15,8 @@
     <!-- Custom styles for this template -->
     <link href="{% static "css/base.css" %}" rel="stylesheet">
 	<!-- Bootstrap 4.0 breaks slider in index -->
-	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">
-	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap-theme.min.css">
+	<link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap-theme.min.css">
   </head>
 
   <body>
@@ -75,7 +75,7 @@
         {% endif %}
           </ul>
 		  </div>
-		  <!-- pt = padding-top --->
+		  <!-- pt = padding-top -->
 		  <div class="col-md-8 pt-3 d-flex justify-content-end align-items-center">
 			<form class="form-inline" id="user_form" 
 				method="post" action="{% url 'book_search' %}">
@@ -97,6 +97,7 @@
 	<!-- Bootstrap core JavaScript
 	================================================== -->
 	<!-- Placed at the end of the document so the pages load faster -->
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
 	<!-- Bootstrap bundle needed for dropdown buttons in books list page which includes Popper.js -->
 	<script
 	src="{% static "js/bootstrap.bundle.min.js" %}">
@@ -107,8 +108,8 @@
 	</script>
 	<script src="{% static "js/bookworm-ajax.js" %}"></script>
     <script src="{% static "js/bookworm-jquery.js" %}"></script>
-	<!-- Don't move this to the top or else stuff breaks -->
-	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
-	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
+	<!-- This needs to be duplicated -->
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+	<script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
   </body>
 </html>

@@ -1,4 +1,5 @@
 .DS_Store
 *.pyc
 .idea/
+bookworm/migrations/
 wad2_project/settings.py

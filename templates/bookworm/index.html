@@ -13,7 +13,7 @@
 				<div class="item active">
 				{% for book in highest_rated %}
 					<div class="col-sm-3">
-						<img src="{{ book.thumbnail }}"/>
+						<a href="/book/{{ book.bookid }}"><img src="{{ book.thumbnail }}"/></a>
 						<center><h4><b><a href="/book/{{ book.bookid }}">{{ book.title }}</a></b></h4></center>
 					</div>
 				   {% if forloop.counter|divisibleby:4 and not forloop.last %}
@@ -45,7 +45,7 @@
 				<div class="item active">
 				{% for book in most_viewed %}
 					<div class="col-sm-3">
-						<img src="{{ book.thumbnail }}"/>
+						<a href="/book/{{ book.bookid }}"><img src="{{ book.thumbnail }}"/></a>
 						<center><h4><b><a href="/book/{{ book.bookid }}">{{ book.title }}</a></b></h4></center>
 					</div>
 				   {% if forloop.counter|divisibleby:4 and not forloop.last %}

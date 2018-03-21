@@ -96,3 +96,7 @@ def profile_edit(request, username):
 			print(form.errors)
 	return render(request, 'bookworm/profile_edit.html',
 		{'userprofile': userprofile, 'selecteduser': user, 'form': form})
+
+def faq(request):
+	context_dict = {}
+	return render(request, 'bookworm/faq.html', context_dict)

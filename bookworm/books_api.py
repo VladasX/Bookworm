@@ -28,7 +28,7 @@ def search_query(search_terms, orderBy="relevance", ):
 		response = urllib.request.urlopen(search_url).read().decode('utf-8')
 		json_response = json.loads(response)
 		for post in json_response['items']:
-			title, linkurl, authors, publisher, publishedDate, description, isbn, averageRating, smallThumbnail, thumbnail, textSnippet = (None,)*11
+			title, linkurl, authors, publisher, publishedDate, description, isbn, averageRating, smallThumbnail, thumbnail, textSnippet, pageCount = (None,)*12
 
 			if "title" in post['volumeInfo']:
 				title = post['volumeInfo']['title']
@@ -52,6 +52,8 @@ def search_query(search_terms, orderBy="relevance", ):
 				thumbnail = post['volumeInfo']['imageLinks']['thumbnail']
 			if "searchInfo" in post and "textSnippet" in post["searchInfo"]:
 				textSnippet = post['searchInfo']['textSnippet']
+			if "pageCount" in post['volumeInfo']:
+				pageCount = post['volumeInfo']['pageCount']
 
 			results.append({'bookid': linkurl,
 							'title': title,
@@ -63,11 +65,12 @@ def search_query(search_terms, orderBy="relevance", ):
 			                'averageRating': averageRating,
 			                'smallThumbnail': smallThumbnail,
 			                'thumbnail': thumbnail,
-			                'textSnippet': textSnippet
+			                'textSnippet': textSnippet,
+							'pageCount': pageCount
 			                 })
 
 			if not Book.objects.filter(bookid=linkurl).exists():
-				Book.objects.create(bookid=linkurl, title=title, authors=authors, publisher=publisher, publishedDate=publishedDate, description=description, isbn=isbn, averageRating=0, thumbnail=thumbnail, textSnippet=textSnippet, pageViews=0)
+				Book.objects.create(bookid=linkurl, title=title, authors=authors, publisher=publisher, publishedDate=publishedDate, description=description, isbn=isbn, averageRating=0, thumbnail=thumbnail, textSnippet=textSnippet, pageViews=0, pageCount=pageCount)
 
 		#Return the list of results to the calling function.
 		return results

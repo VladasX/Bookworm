@@ -1,5 +1,5 @@
 {% extends "bookworm/base.html" %}
-{% load staticfiles %}
+
 {% block title_block %}
 	Book List
 {% endblock %}
@@ -13,7 +13,7 @@
 				<div class="card mb-3 box-shadow">
 					<img class="card-img-top" src="{{ book.thumbnail }}" alt="Card image cap">
 					<div class="card-body">
-						<p class="card-text">{{ book.title }}</p>
+						<p class="card-text"><h5>{{ book.title }}</h5></p>
 						<div class="d-flex justify-content-between align-items-center">
 							<div class="btn-group">
 								<a href="/book/{{ book.bookid }}"><button type="button" class="btn btn-sm btn-outline-secondary">View</button></a>
@@ -27,8 +27,8 @@
 									<div class="modal-dialog" role="document">
 										<div class="modal-content">
 											<!-- Header contains book's title -->
-											<h5><div class="modal-header">
-											</div></h5>
+											<h4><div class="modal-header">
+											</div></h4>
 											<!-- Body contains book's description -->
 											<div class="modal-body">
 											</div>
@@ -40,6 +40,7 @@
 								</div>
 								
 							</div>
+							<small class="text-muted">Views: {{ book.pageViews }}</small>
 						</div>
 					</div>
 				</div>

@@ -1,4 +1,3 @@
- <!--This is only a temp book html, to be changed later by someone.-->
 {% extends "bookworm/base.html" %}
 
 {% block title_block %}
@@ -6,14 +5,24 @@
 {% endblock %}
 
 {% block body_block %}
-<h1>Temp book page.</h1>
-<h2><img style="float: left;" src="{{ book_data.thumbnail }}"></h2>
-<h1>{{ book_data.title }} by {{ book_data.authors }}</h1>
-<p>Description: {{ book_data.description }}</p>
-<p>ISBN: {{ book_data.isbn }}</p>
-<p>Average Rating: {{ book_data.averageRating }}</p>
-<p>Publisher: {{ book_data.publisher }}, Published Date: {{ book_data.publishedDate }}</p>
-<a href="review/" class="btn btn-default">Add a review.</a>
+<div class="row">
+	<div class="col-auto">
+		<img style="float: left;" src="{{ book_data.thumbnail }}">
+		<center><p><b>Avg. Rating:</b> {{ book_data.averageRating }}</p></center>
+	</div>
+	<div class="col">
+		<h2>{{ book_data.title }} by {{ book_data.authors }}</h2><br>
+		<font size="4">
+		<p><b>Author(s)</b>: {{ book_data.authors }}</p>
+		<p><b>Description</b>: {{ book_data.description }}</p>
+		<p><b>Pages</b>: {{ book_data.pageCount }}</p>
+		<p><b>ISBN:</b> {{ book_data.isbn }}</p>
+		<p><b>Publisher:</b> {{ book_data.publisher }}</p>
+		<p><b>Date Published</b>: {{ book_data.publishedDate }}</p>
+		<a href="review/" class="btn btn-secondary">Make a review</a>
+		</font>
+	</div>
+</div>
 {% if reviews %}
 	{% for review in reviews %}
 		<p>{{ review.text }}</p>

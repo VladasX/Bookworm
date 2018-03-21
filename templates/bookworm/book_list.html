@@ -1,7 +1,5 @@
-<!--TEMP BOOK LIST PAGE-->
-
 {% extends "bookworm/base.html" %}
-
+{% load staticfiles %}
 {% block title_block %}
 	Book List
 {% endblock %}
@@ -11,14 +9,36 @@
 	{% if books %}
 		<div class="row">
 			{% for book in books %}
-			<div class="col-md-4">
-				<div class="card mb-4 box-shadow">
+			<div class="col-md-3">
+				<div class="card mb-3 box-shadow">
 					<img class="card-img-top" src="{{ book.thumbnail }}" alt="Card image cap">
 					<div class="card-body">
 						<p class="card-text">{{ book.title }}</p>
 						<div class="d-flex justify-content-between align-items-center">
 							<div class="btn-group">
 								<a href="/book/{{ book.bookid }}"><button type="button" class="btn btn-sm btn-outline-secondary">View</button></a>
+								
+								<!-- Triggers a dialog box/popup window to show book's description -->
+								<button type="button" class="btn btn-sm btn-outline-secondary" data-title="{{ book.title }}" data-desc="{{ book.description }}" 
+								data-toggle="modal" data-target="#book-modal">Description</button>
+
+								<!-- JQuery is used to populate the contents of a popup -->
+								<div class="modal fade" id="book-modal" tabindex="-1" role="dialog" aria-labelledby="book-modal" aria-hidden="true">
+									<div class="modal-dialog" role="document">
+										<div class="modal-content">
+											<!-- Header contains book's title -->
+											<h5><div class="modal-header">
+											</div></h5>
+											<!-- Body contains book's description -->
+											<div class="modal-body">
+											</div>
+											<div class="modal-footer">
+												<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+											</div>
+										</div>
+									</div>
+								</div>
+								
 							</div>
 						</div>
 					</div>

@@ -54,10 +54,8 @@ def book_page(request, bookid):
 
 #Displays a list of books that are stored in the database.
 def book_list(request): #Maybe add the ability to allow them to sort the list.
-	context_dict = {}
 	books = Book.objects.order_by("averageRating")
-	context_dict["books"] = books
-	return render(request, "bookworm/book_list.html", context_dict)
+	return render(request, "bookworm/book_list.html", {'books': books})
 
 #Allows a user to add a review for a book.
 @login_required
@@ -131,15 +129,13 @@ def profile_edit(request, username):
 		{'userprofile': userprofile, 'selecteduser': user, 'form': form})
 		
 		
-#Allows to see the reading list of a person
+#Allows to see the reading list of a person.
 def reading_list(request, username):
 	try:
 		user = User.objects.get(username=username)
 	except User.DoesNotExist:
 		return redirect('index')
 	reading_data = BookInterest.objects.filter(user=user)
-	
-	
 	if reading_data:
 		return render(request, 'bookworm/reading_list.html', {'reading_data': reading_data, 'user': user})
 	return render(request, 'bookworm/error.html')

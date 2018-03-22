@@ -86,7 +86,7 @@
 			<form class="form-inline" id="user_form" 
 				method="post" action="{% url 'book_search' %}">
 				{% csrf_token %}
-				<div class="input-group">
+				<div class="input-group" id="navsearchbar">
 					<input class="form-control" type="text"
 						name="query" placeholder="Search for a book..." value="" id="query" />
 				</div>
@@ -117,10 +117,5 @@
 	<!-- This needs to be duplicated -->
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
 	<script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
-  <script> $(document).ready(function() {
-              $('li.active').removeClass('active');
-              $('a[href="' + location.pathname + '"]').addClass('active'); 
-            });
-  </script>
   </body>
 </html>

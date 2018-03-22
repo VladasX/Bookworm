@@ -34,7 +34,9 @@
 			{% else %}
 				<img style="float: left; width:100px; height:100px" src="{% static 'images/default_avatar.png' %}">
 			{% endif %}
-			<h2><b>{{ review.user.username }}</h2></b> {{ review.text }}
+			<font size="6"><b>{{ review.user.username }}</font></b> 
+			<h3><b>Rating: </b>{{ review.rating }}</h3>
+			<font size="3">{{ review.text }}</font>
 		</div>
 	{% endfor %}
 	</div>

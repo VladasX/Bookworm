@@ -22,7 +22,8 @@ class UserProfileForm(forms.ModelForm):
 #Form for reviews.
 class ReviewForm(forms.ModelForm):
 	text = forms.CharField(required=False)
+	rating = forms.IntegerField(required=False)
 
 	class Meta:
 		model = Review
-		fields = ('text', )
+		fields = ('text', 'rating', )

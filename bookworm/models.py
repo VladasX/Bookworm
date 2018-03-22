@@ -14,7 +14,7 @@ class Book(models.Model):
 	thumbnail = models.URLField(max_length=2000, null=True)
 	textSnippet = models.TextField(max_length=2000, null=True)
 	pageCount = models.IntegerField(null=True)
-	pageViews = models.IntegerField()
+	pageViews = models.IntegerField(default=0)
 
 
 #Model for reviews stored.
@@ -23,6 +23,7 @@ class Review(models.Model):
 	book = models.ForeignKey(Book)
 	text = models.TextField(max_length=4096, null=True)
 	timestamp = models.DateTimeField(auto_now=True)
+	rating = models.IntegerField(default=0)
 
 #Model for user profile.
 class UserProfile(models.Model):

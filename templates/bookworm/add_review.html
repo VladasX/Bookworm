@@ -11,10 +11,17 @@
 	<form role="form"  method="post">
 		{% csrf_token %}
 		<div class="form-group" >
-		<p class="required"><label class="required" for="id_text">Review:</label>
-			<input class="form-control" id="id_text"" name="text" type="text" />
-		</p>
-	</div>
+			<label for="rate">Rating (1 - worst, 5 - best):</label>
+			<select class="form-control" id="rate" name="rating">
+				<option value="1">(1) Very Bad</option>
+				<option value="2">(2) Poor</option>
+				<option value="3">(3) Average</option>
+				<option value="4">(4) Good</option>
+				<option value="5">(5) Excellent</option>
+			</select>
+			<h3><label for="review">Review:</label></h3>
+			<textarea class="form-control" rows="6" id="review" name="text" type="text"></textarea>
+		</div>
 		<button type="submit">Submit</button>
 	</form>
 </div>

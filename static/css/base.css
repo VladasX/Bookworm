@@ -7,6 +7,23 @@ body {
   margin-bottom: 20px;
 }
 
+.navbaricon{
+  margin-top:-6px;
+  margin-left:-25px;
+  margin-right:20px;
+  width:32px;
+  height:32px;
+}
+
+.navbarmargin{
+  margin-left: -65px;
+  margin-right: 85px;
+}
+
+.navbartext{
+  color: #ffffff;
+}
+
 h1 {
   margin-bottom: 20px;
   padding-bottom: 9px;

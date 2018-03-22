@@ -34,8 +34,9 @@
 			{% else %}
 				<img style="float: left; width:100px; height:100px" src="{% static 'images/default_avatar.png' %}">
 			{% endif %}
-			<font size="6"><b>{{ review.user.username }}</font></b> 
-			<h3><b>Rating: </b>{{ review.rating }}</h3>
+			<p><font size="6" style="margin-left:5px;"><b>{{ review.user.username }}</b></font></p>
+			<font size="3" style="margin-left:5px;"><b>Rating: </b>{{ review.rating }}</font> 
+			<p><font size="3" style="margin-left:5px;"><b>Reviewed: </b></font><font size="2">{{ review.timestamp }}</font></p>
 			<font size="3">{{ review.text }}</font>
 		</div>
 	{% endfor %}

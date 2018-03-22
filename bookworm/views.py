@@ -101,7 +101,10 @@ def profile(request, username):
 	userprofile = UserProfile.objects.get_or_create(user=user)[0]
 	review = {}
 	if userprofile.favouriteBook != None:
-		review = Review.objects.get(book=userprofile.favouriteBook.bookid, user=user)
+		try:
+			review = Review.objects.get(book=userprofile.favouriteBook.book.bookid, user=user)
+		except:
+			pass
 	form = UserProfileForm(
 		{'bio': userprofile.bio, 'picture': userprofile.picture})
 	return render(request, 'bookworm/profile.html',

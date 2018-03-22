@@ -25,15 +25,15 @@
 		{% if userprofile.favouriteBook %}
 			<div class="col-md-3 col-md-offset-2">
 				<h1 align="center">Favourite Book</h1>
-					<div class="card mb-2 box-shadow"><a href="/book/{{ userprofile.favouriteBook.bookid }}">
-						<img class="card-img-top" src="{{ userprofile.favouriteBook.thumbnail }}" alt="Bookcover"></a>
+					<div class="card mb-2 box-shadow"><a href="/book/{{ userprofile.favouriteBook.book.bookid }}">
+						<img class="card-img-top" src="{{ userprofile.favouriteBook.book.thumbnail }}" alt="Bookcover"></a>
 						<div class="card-body">
 							<h5>{{ book.title }}</h5>
 								<div class="d-flex justify-content-center align-items-center">
-										<div class="btn-group"><a href="/book/{{ selecteduser.userprofile.favouriteBook.bookid }}">
+										<div class="btn-group"><a href="/book/{{ selecteduser.userprofile.favouriteBook.book.bookid }}">
 											<button class="btn btn-sm btn-outline-secondary" type="button">View</button></a>
 											<!-- Triggers a dialog box/popup window to show book's description -->
-											<button class="btn btn-sm btn-outline-secondary" type="button" data-title="{{ userprofile.favouriteBook.title }}" data-desc="{{ userprofile.favouriteBook.description }}" data-toggle="modal" data-target="#book-modal">Description</button> 
+											<button class="btn btn-sm btn-outline-secondary" type="button" data-title="{{ userprofile.favouriteBook.book.title }}" data-desc="{{ userprofile.favouriteBook.book.description }}" data-toggle="modal" data-target="#book-modal">Description</button> 
 											{% if review %} 
 												<button class="btn btn-sm btn-outline-secondary" type="button" data-title="{{ selecteduser.username }}'s Review" data-desc="{{ review.text }}" data-rating="Rating: {{ review.rating }}" data-toggle="modal" data-target="#book-modal">Review</button> 
 											{% endif %}

@@ -31,12 +31,15 @@ class BookInterest(models.Model):
 	book = models.ForeignKey(Book)
 	status = models.IntegerField(default=0)
 	
+	def __str__(self):
+		return self.book.title
+	
 #Model for user profile.
 class UserProfile(models.Model):
 	user = models.OneToOneField(User, primary_key=True)
 	bio = models.CharField(max_length=2000, blank=True)
 	picture = models.ImageField(upload_to='profile_images', blank=True)
-	favouriteBook = models.ForeignKey(Book, null=True)
+	favouriteBook = models.ForeignKey(BookInterest, null=True)
 
 	def __str__(self):
 		return self.user.username

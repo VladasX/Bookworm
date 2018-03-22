@@ -35,10 +35,17 @@
 			{% else %}
 				<img style="float: left; width:100px;height:100px" src="{% static 'images/default_avatar.png' %}">
 			{% endif %}
-			<p><font size="6" style="margin-left:5px;"><b>{{ review.user.username }}</b></font></p>
+			<font size="6" style="margin-left:5px;"><b>{{ review.user.username }}</b></font>
+			<br>
 			</a>
-			<font size="3" style="margin-left:5px;"><b>Rating: </b>{{ review.rating }}</font> 
-			<p><font size="3" style="margin-left:5px;"><b>Reviewed: </b></font><font size="2">{{ review.timestamp }}</font></p>
+			<span>
+			{% for i in "xxxxxxxxxxxxxxxxxxxx" %}
+				{% if forloop.counter0 < review.rating %}
+					<img style="margin-left:5px; width:35px;height:35px" src="{% static 'images/star.png' %}">
+				{% endif %}
+			{% endfor %}
+			</span>
+			<p><font size="3" style="margin-left:8px;"><b>Reviewed: </b></font><font size="2">{{ review.timestamp }}</font></p>
 			<font size="3">{{ review.text }}</font>
 		</div>
 	{% endfor %}

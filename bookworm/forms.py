@@ -1,6 +1,6 @@
 from django import forms
 from django.contrib.auth.models import User
-from bookworm.models import UserProfile, Review
+from bookworm.models import UserProfile, Review, BookInterest
 
 #Form for user accounts.
 class UserForm(forms.ModelForm):
@@ -27,3 +27,12 @@ class ReviewForm(forms.ModelForm):
 	class Meta:
 		model = Review
 		fields = ('text', 'rating', )
+		
+
+#Form for interest in books
+class InterestForm(forms.ModelForm):
+	status = forms.IntegerField(required=False)
+
+	class Meta:
+		model = BookInterest
+		fields = ('status', )

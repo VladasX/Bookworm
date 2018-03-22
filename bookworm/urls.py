@@ -22,5 +22,6 @@ urlpatterns = [
 	url(r'^accounts/', include('registration.backends.simple.urls')),
     url(r'^profile/(?P<username>[\w\-]+)/$', views.profile, name='profile'),
     url(r'^profile_edit/(?P<username>[\w\-]+)/$', views.profile_edit, name='profile_edit'),
+	url(r'^reading_list/(?P<username>[\w\-]+)/$', views.reading_list, name='reading_list'),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 

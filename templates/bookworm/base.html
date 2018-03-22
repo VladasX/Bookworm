@@ -68,6 +68,7 @@
 				<a class="dropdown-item" href="/profile/{{ user.username }}">View your profile</a>
 				<a class="dropdown-item" href="/profile_edit/{{ user.username }}">Edit your profile</a>
 				<a class="dropdown-item" href="{% url 'auth_password_change' %}">Change your password</a>
+				<a class="dropdown-item" href="/reading_list/{{ user.username }}">Your reading list</a>
             </div>
 			</li>
             <li class="nav-item">

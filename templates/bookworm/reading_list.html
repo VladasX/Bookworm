@@ -1,0 +1,68 @@
+{% extends "bookworm/base.html" %}
+{% load staticfiles %}
+{% block title_block %}
+	Profile
+{% endblock %}
+
+{% block body_block %}
+
+	<style>
+	table {
+		font-family: arial, sans-serif;
+		border-collapse: collapse;
+		width: 100%;
+	}
+
+	td, th {
+    border: 1px solid #dddddd;
+    text-align: left;
+    padding: 8px;
+	}
+
+	tr:nth-child(even) {
+    background-color: #dddddd;
+	}
+	</style>
+	<h1> Welcome to {{ user.username }}'s reading list</h2>
+	<div class="container">
+		{% if reading_data %}
+			<table>
+			<tr>
+				<th style="text-decoration: underline">Book title</th>
+				<th style="text-decoration: underline">Reading status</th>
+			</tr>
+			{% for data in reading_data %}
+				<tr>
+				<th>{{ data.book.title }}</th>
+				<th><div class="stat">{{ data.status }}</div></th>
+				</tr>
+			{% endfor %}
+			</table>
+			
+		{% endif %}
+	</div>
+	
+	<script>
+		function status(n){
+			switch(n){
+				case 0:
+				return "I'm reading this!";
+				case 1:
+				return "I've read this!";
+				case 2:
+				return "I want to read it!";
+				case 3:
+				return "I dropped this...";
+				default:
+				return 0;
+			}
+		
+		}
+		
+		var es = document.getElementsByClassName("stat");
+		for(i = 0; i < es.length; i++){
+			es[i].innerHTML = status(parseInt(es[i].innerHTML));
+		}
+	
+	</script>
+{% endblock %}

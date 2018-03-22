@@ -25,6 +25,14 @@ class Review(models.Model):
 	timestamp = models.DateTimeField(auto_now=True)
 	rating = models.IntegerField(default=0)
 
+#Model for interest in a book
+class BookInterest(models.Model):
+	user = models.ForeignKey(User)
+	book = models.ForeignKey(Book)
+	status = models.IntegerField(default=0)
+	
+	
+	
 #Model for user profile.
 class UserProfile(models.Model):
 	user = models.OneToOneField(User, primary_key=True)

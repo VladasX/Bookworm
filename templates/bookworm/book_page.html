@@ -18,14 +18,14 @@
 		<p><b>ISBN:</b> {{ book_data.isbn }}</p>
 		<p><b>Publisher:</b> {{ book_data.publisher }}</p>
 		<p><b>Date Published</b>: {{ book_data.publishedDate }}</p>
-		{% if average == "No ratings found." %}
+		{% if book_data.averageRating == 0 %}
 			<strong>This book has yet to be rated.</strong>
 		{% else %}
 			<p><b>Average Rating</b>:
 			<!-- a hack for numerical loops
 			https://stackoverflow.com/questions/1107737/numeric-for-loop-in-django-templates -->
 			{% for i in "xxxxx" %}
-				{% if forloop.counter0 < average %}
+				{% if forloop.counter0 < book_data.averageRating %}
 					<img style="margin-left:5px; width:35px;height:35px" src="{% static 'images/star.png' %}">
 				{% else %}
 					<img style="margin-left:5px; width:35px;height:35px" src="{% static 'images/nostar.png' %}">

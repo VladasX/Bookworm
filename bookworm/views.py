@@ -32,13 +32,6 @@ def book_search(request):
 def book_page(request, bookid):
 	book_data = Book.objects.get(bookid=bookid)
 	reviews = Review.objects.filter(book_id=book_data.bookid)
-	average = "No ratings found."
-	if len(reviews) != 0:
-		average = 0
-		for review in reviews:
-			average += review.rating
-		average = round(average/len(reviews))
-	print(average)
 	if book_data:
 		book_data.pageViews = (book_data.pageViews+1)
 		book_data.save()
@@ -53,10 +46,10 @@ def book_page(request, bookid):
 					book_interest.status = form.cleaned_data['status']
 					book_interest.save()
 			else:
-				render(request, 'bookworm/book_page.html', {'book_data': book_data, 'reviews': reviews, 'form': form, 'average': average})
+				render(request, 'bookworm/book_page.html', {'book_data': book_data, 'reviews': reviews, 'form': form})
 		except User.DoesNotExist:
-			return render(request, 'bookworm/book_page.html', {'book_data': book_data, 'reviews': reviews, 'average': average})
-		return render(request, 'bookworm/book_page.html', {'book_data': book_data, 'reviews': reviews, 'form': form, 'average': average})
+			return render(request, 'bookworm/book_page.html', {'book_data': book_data, 'reviews': reviews})
+		return render(request, 'bookworm/book_page.html', {'book_data': book_data, 'reviews': reviews, 'form': form})
 	return render(request, 'bookworm/error.html')
 
 #Displays a list of books that are stored in the database.
@@ -86,6 +79,14 @@ def add_review(request, bookid):
 			book_review.rating = form.cleaned_data['rating']
 			book_review.save()
 			reviews = Review.objects.filter(book_id=book.bookid)
+			if len(reviews) != 0:
+				average = 0
+				for review in reviews:
+					average += review.rating
+				book.averageRating = round(average/len(reviews))
+			else:
+				book.averageRating = book_review.rating
+			book.save()
 			return redirect('/book/{}'.format(book.bookid))
 		else:
 			print(form.errors)

@@ -40,14 +40,14 @@
 				{% csrf_token %}
 				<label>Add this book to your list!</label>
 				<br/>
-				<select class="form-control" id="status" name="status">
+				<select class="form-control-static.input-lg" id="status" name="status">
 					<option value="0">I'm reading this!</option>
 					<option value="1">I've read this!</option>
 					<option value="2">I want to read it!</option>
 					<option value="3">I dropped this...</option>
 				</select>
-				<br/>
 			<button class="btn btn-secondary" type="submit">Add book</button>
+			<br/>
 			</form>
 		{% endif %}
 		</font>

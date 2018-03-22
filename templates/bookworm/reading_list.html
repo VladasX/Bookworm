@@ -34,7 +34,15 @@
 			{% for data in reading_data %}
 				<tr>
 				<th>{{ data.book.title }}</th>
-				<th><div class="stat">{{ data.status }}</div></th>
+				{% if data.status == 0 %}
+					<th><div class="col-7 stat badge-pill badge-primary">{{ data.status }}</div></th>
+				{% elif data.status == 1 %}
+					<th><div class="col-7 stat badge-pill badge-success">{{ data.status }}</div></th>
+				{% elif data.status == 2 %}
+					<th><div class="col-7 stat badge-pill badge-warning">{{ data.status }}</div></th>
+				{% elif data.status == 3 %}
+					<th><div class="col-7 stat badge-pill badge-danger">{{ data.status }}</div></th>
+				{% endif %}
 				</tr>
 			{% endfor %}
 			</table>

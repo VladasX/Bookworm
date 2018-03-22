@@ -65,7 +65,7 @@ def add_review(request, bookid):
 			book_review.rating = form.cleaned_data['rating']
 			book_review.save()
 			reviews = Review.objects.filter(book_id=book.bookid)
-			return render(request, 'bookworm/book_page.html', {'book_data': book, 'reviews': reviews})
+			return redirect('/book/{}'.format(book.bookid))
 		else:
 			print(form.errors)
 	return render(request, 'bookworm/add_review.html', {'form': form})

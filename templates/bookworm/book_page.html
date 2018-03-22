@@ -8,7 +8,6 @@
 <div class="row">
 	<div class="col-4">
 		<img style="float: left; width:100%" src="{{ book_data.thumbnail }}">
-		<center><p><font size="4"><b>Average Rating:</b> {{ average }}</font> </p></center>
 	</div>
 	<div class="col-8">
 		<h2>{{ book_data.title }} by {{ book_data.authors }}</h2><br>
@@ -19,6 +18,21 @@
 		<p><b>ISBN:</b> {{ book_data.isbn }}</p>
 		<p><b>Publisher:</b> {{ book_data.publisher }}</p>
 		<p><b>Date Published</b>: {{ book_data.publishedDate }}</p>
+		{% if average == "No ratings found." %}
+			<strong>This book has yet to be rated.</strong>
+		{% else %}
+			<p><b>Average Rating</b>:
+			<!-- a hack for numerical loops
+			https://stackoverflow.com/questions/1107737/numeric-for-loop-in-django-templates -->
+			{% for i in "xxxxx" %}
+				{% if forloop.counter0 < average %}
+					<img style="margin-left:5px; width:35px;height:35px" src="{% static 'images/star.png' %}">
+				{% else %}
+					<img style="margin-left:5px; width:35px;height:35px" src="{% static 'images/nostar.png' %}">
+				{% endif %}
+			{% endfor %}
+		{% endif %}
+		</p>
 		{% if user.is_authenticated %}
 			<a href="review/" class="btn btn-secondary">Write a review</a>
 			<br/><br/>
@@ -40,7 +54,7 @@
 	</div>
 </div>
 {% if reviews %}
-	<h2><b>Reviews:</h2>
+	<h2><b>Reviews:</b></h2>
 	<div class="row">
 	{% for review in reviews %}
 		<div class="col-4">
@@ -59,6 +73,8 @@
 			{% for i in "xxxxx" %}
 				{% if forloop.counter0 < review.rating %}
 					<img style="margin-left:5px; width:35px;height:35px" src="{% static 'images/star.png' %}">
+				{% else %}
+					<img style="margin-left:5px; width:35px;height:35px" src="{% static 'images/nostar.png' %}">
 				{% endif %}
 			{% endfor %}
 			</span>

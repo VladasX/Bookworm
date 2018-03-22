@@ -47,3 +47,9 @@ h1 {
   width: 100%;
   height: auto;
 }
+
+.imagetext{
+  margin-top:10px;
+  display:inline-block;
+  font-size:medium;
+}

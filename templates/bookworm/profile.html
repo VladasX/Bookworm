@@ -17,7 +17,7 @@
 		{% else %} 
 			<img src="{% static 'images/default_avatar.png' %}" alt="" /> 
 		{% endif %}
-			<p><strong><span style="margin-top: 10px; display: inline-block; font-size: medium;">
+			<p><strong><span class="imagetext">
 			Bio:</span></strong> {% if userprofile.bio %} <a>{{userprofile.bio}}</a></p>
 		{% else %} 
 			<a>This user hasn't set a bio yet.</a> 

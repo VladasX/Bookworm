@@ -1,5 +1,5 @@
 {% extends "bookworm/base.html" %}
-
+{% load staticfiles %}
 {% block title_block %}
 	Book page
 {% endblock %}
@@ -29,7 +29,11 @@
 	<div class="row">
 	{% for review in reviews %}
 		<div class="col-4">
-			<img style="float: left; width:100px; height:100px" src="../../media/{{ review.user.userprofile.picture }}">
+			{% if review.user.userprofile.picture %}
+				<img style="float: left; width:100px; height:100px" src="{{ MEDIA_URL }}{{ review.user.userprofile.picture }}">
+			{% else %}
+				<img style="float: left; width:100px; height:100px" src="{% static 'images/default_avatar.png' %}">
+			{% endif %}
 			<h2><b>{{ review.user.username }}</h2></b> {{ review.text }}
 		</div>
 	{% endfor %}

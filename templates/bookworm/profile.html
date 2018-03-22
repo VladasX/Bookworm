@@ -1,28 +1,61 @@
-{% extends "bookworm/base.html" %}
-{% load staticfiles %}
-{% block title_block %}
-	Profile
-{% endblock %}
+{% extends "bookworm/base.html" %} 
+{% load staticfiles %} 
+{% block title_block %} 
+	Profile 
+{% endblock %} 
 
 {% block body_block %}
-<h1>{{selecteduser.username}}'s Profile</h1>
+
 <div class="row">
-	{% if userprofile.picture %}
-		<img src="{{ MEDIA_URL }}{{ userprofile.picture }}"
-			width="300"
-			height="300"
-			alt="{{ selecteduser.username }}" />
-	{% else %}
-		<div class="col-4">
-			<img src="{% static 'images/default_avatar.png' %}"> 
-		</div>
-	{% endif %}
-	<font size="4">
-	<div class="col">
-		<p><strong>Bio:</strong> <a "{{ userprofile.bio}}">
-			{{userprofile.bio}}</a></p>
+	<div class="col-4 col-md-offset-1">
+		<h1>{{ selecteduser.username }}'s Profile</h1>
+		{% if userprofile.picture %} 
+			<img src="{{ MEDIA_URL }}{{ userprofile.picture }}" 
+				alt="{{ selecteduser.username}}" 
+				width="300" 
+				height="300" /> 
+		{% else %} 
+			<img src="{% static 'images/default_avatar.png' %}" alt="" /> 
+		{% endif %}
+			<p><strong><span style="margin-top: 10px; display: inline-block; font-size: medium;">
+			Bio:</span></strong> {% if userprofile.bio %} <a>{{userprofile.bio}}</a></p>
+		{% else %} 
+			<a>This user hasn't set a bio yet.</a> 
+		{% endif %}</div>
+		{% if userprofile.favouriteBook %}
+			<div class="col-md-3 col-md-offset-2">
+				<h1 align="center">Favourite Book</h1>
+					<div class="card mb-2 box-shadow"><a href="/book/{{ userprofile.favouriteBook.bookid }}">
+						<img class="card-img-top" src="{{ userprofile.favouriteBook.thumbnail }}" alt="Bookcover"></a>
+						<div class="card-body">
+							<h5>{{ book.title }}</h5>
+								<div class="d-flex justify-content-center align-items-center">
+										<div class="btn-group"><a href="/book/{{ selecteduser.userprofile.favouriteBook.bookid }}">
+											<button class="btn btn-sm btn-outline-secondary" type="button">View</button></a>
+											<!-- Triggers a dialog box/popup window to show book's description -->
+											<button class="btn btn-sm btn-outline-secondary" type="button" data-title="{{ userprofile.favouriteBook.title }}" data-desc="{{ userprofile.favouriteBook.description }}" data-toggle="modal" data-target="#book-modal">Description</button> 
+											{% if review %} 
+												<button class="btn btn-sm btn-outline-secondary" type="button" data-title="{{ selecteduser.username }}'s Review" data-desc="{{ review.text }}" data-rating="Rating: {{ review.rating }}" data-toggle="modal" data-target="#book-modal">Review</button> 
+											{% endif %}
+
+											<!-- JQuery is used to populate the contents of a popup -->
+											<div id="book-modal" class="modal fade" tabindex="-1">
+												<div class="modal-dialog">
+												<div class="modal-content">
+												<!-- Header contains book's title -->
+												<h4><div class="modal-header"></div></h4>
+												<!-- Body contains book's description -->
+												<div class="modal-body"></div>
+												<div class="modal-rating" style="margin-left: 15px; font-size: 20px; font-weight: bold;"></div>
+									<div class="modal-footer"><button class="btn btn-secondary" type="button" data-dismiss="modal">Close</button></div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
 	</div>
-	<div id="edit_profile"></div>
-	</font>
 </div>
+{% endif %}</div>
+	<div id="edit_profile"> </div>
 {% endblock %}

@@ -39,7 +39,9 @@
 			<br>
 			</a>
 			<span>
-			{% for i in "xxxxxxxxxxxxxxxxxxxx" %}
+			<!-- a hack for numerical loops
+			https://stackoverflow.com/questions/1107737/numeric-for-loop-in-django-templates -->
+			{% for i in "xxxxx" %}
 				{% if forloop.counter0 < review.rating %}
 					<img style="margin-left:5px; width:35px;height:35px" src="{% static 'images/star.png' %}">
 				{% endif %}

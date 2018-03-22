@@ -82,10 +82,30 @@
 						</div>
 						<div class="col-sm-6">
 						<center>
-						<h3><b>{{ review.book.title }}</b></h3>
+						<font size="5"><b>{{ review.book.title }}</b></font>
 						</center>
-						<h3>{{ review.user }}</h3>
-						<h4>{{ review.text|slice:":340" }}...</h4>
+						{% if review.user.userprofile.picture %}
+							<img style="float: left; width:65px;height:65px" src="{{ MEDIA_URL }}{{ review.user.userprofile.picture }}">
+						{% else %}
+							<img style="float: left; width:65px;height:65px" src="{% static 'images/default_avatar.png' %}">
+						{% endif %}
+						<a href="/profile/{{ review.user.username }}">
+						<font size="5" style="margin-left:5px;">{{ review.user }}</font>
+						</a>
+						<br>
+						<!-- a hack for numerical loops
+						https://stackoverflow.com/questions/1107737/numeric-for-loop-in-django-templates -->
+						{% for i in "xxxxx" %}
+							{% if forloop.counter0 < review.rating %}
+								{% if forloop.first %}
+								<img style="margin-left:5px; float: left; width:30px;height:30px" src="{% static 'images/star.png' %}">
+								{% else %}
+								<img style="float: left; width:30px;height:30px" src="{% static 'images/star.png' %}">
+								{% endif %}
+							{% endif %}
+						{% endfor %}
+						<br><br>
+						<h4>{{ review.text|slice:":300" }}...</h4>
 						</div>
 					</div>
 				   {% if forloop.counter|divisibleby:4 and not forloop.last %}

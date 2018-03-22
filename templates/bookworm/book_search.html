@@ -27,12 +27,21 @@
 		<div class="list-group">
 		{% for result in result_list %}
 			<div class="list-group-item">
-			<h4 class="list-group-item-heading">
+			<h3 class="list-group-item-heading">
 			<a href="/book/{{ result.bookid }}">{{ result.title }}</a>
-			</h4> 
-			<p class="list-group-item-text"><img src="{{ result.smallThumbnail }}">
-			<!-- br tag in order to separate thumbnail from description -->
-			<br>{{ result.description }}</p>
+			</h3> 
+			<div class="row">
+				<div class="col-2">
+					<p style="margin-left:25px; padding-top:5px; class="list-group-item-text"><img style="float: left;" src="{{ result.smallThumbnail }}">
+				</div>
+				<div class="col-10">
+					<p><b>Author(s)</b>: {{ result.authors }}</p>
+					<p><b>Description</b>: {{ result.description }}</p>
+					<p><b>Pages</b>: {{ result.pageCount }}</p>
+					<p><b>Publisher:</b> {{ result.publisher }}</p>
+					<p><b>Date Published</b>: {{ result.publishedDate }}</p>
+				</div>
+			</div>
 			</div>
 		{% endfor %}
 		</div>

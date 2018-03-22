@@ -11,16 +11,18 @@
 		<img src="{{ MEDIA_URL }}{{ userprofile.picture }}"
 			width="300"
 			height="300"
-			alt="{{ selecteduser.username}}" />
+			alt="{{ selecteduser.username }}" />
 	{% else %}
 		<div class="col-4">
 			<img src="{% static 'images/default_avatar.png' %}"> 
 		</div>
 	{% endif %}
+	<font size="4">
 	<div class="col">
 		<p><strong>Bio:</strong> <a "{{ userprofile.bio}}">
 			{{userprofile.bio}}</a></p>
 	</div>
 	<div id="edit_profile"></div>
+	</font>
 </div>
 {% endblock %}

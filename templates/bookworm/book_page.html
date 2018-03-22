@@ -8,7 +8,7 @@
 <div class="row">
 	<div class="col-4">
 		<img style="float: left; width:100%" src="{{ book_data.thumbnail }}">
-		<center><p><font size="4"><b>Average Rating:</b> {{ book_data.averageRating }}</font> </p></center>
+		<center><p><font size="4"><b>Average Rating:</b> {{ average }}</font> </p></center>
 	</div>
 	<div class="col-8">
 		<h2>{{ book_data.title }} by {{ book_data.authors }}</h2><br>
@@ -26,6 +26,7 @@
 	</div>
 </div>
 {% if reviews %}
+	<h2><b>Reviews:</h2>
 	<div class="row">
 	{% for review in reviews %}
 		<div class="col-4">

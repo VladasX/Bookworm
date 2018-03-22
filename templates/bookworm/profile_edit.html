@@ -18,6 +18,7 @@
 			<img src="{% static 'images/default_avatar.png' %}"> 
 		</div>
 	{% endif %}
+	<font size="4">
 	<div class="col">
 		{% if selecteduser.username == user.username %}
 			<form method="post" action="." enctype="multipart/form-data">
@@ -31,6 +32,7 @@
 		{% endif %}
 	</div>
 	<div id="edit_profile"></div>
+	</font>
 </div>
 {% else %}
 <p>You can not edit someone else's profile</p>

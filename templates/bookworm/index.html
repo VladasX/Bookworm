@@ -108,7 +108,7 @@
 						<h4>{{ review.text|slice:":300" }}...</h4>
 						</div>
 					</div>
-				   {% if forloop.counter|divisibleby:4 and not forloop.last %}
+				   {% if forloop.counter|divisibleby:2 and not forloop.last %}
 				   </div>
 				   <div class="item">
 				   {% endif %}

@@ -54,7 +54,7 @@ def book_page(request, bookid):
 
 #Displays a list of books that are stored in the database.
 def book_list(request): #Maybe add the ability to allow them to sort the list.
-	books = Book.objects.order_by("averageRating")
+	books = Book.objects.all()
 	return render(request, "bookworm/book_list.html", {'books': books})
 
 #Allows a user to add a review for a book.
@@ -98,7 +98,7 @@ def profile(request, username):
 		return redirect('index')
 	userprofile = UserProfile.objects.get_or_create(user=user)[0]
 	review = {}
-	if userprofile.favouriteBook != None:
+	if userprofile.favouriteBook:
 		try:
 			review = Review.objects.get(book=userprofile.favouriteBook.book.bookid, user=user)
 		except:

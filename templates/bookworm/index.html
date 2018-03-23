@@ -82,7 +82,7 @@
 						</div>
 						<div class="col-sm-6">
 						<center>
-						<font size="5"><b>{{ review.book.title }}</b></font>
+						<p style="font-size:22px"><b>{{ review.book.title }}</b></p>
 						</center>
 						{% if review.user.userprofile.picture %}
 							<img style="float: left; width:65px;height:65px" src="{{ MEDIA_URL }}{{ review.user.userprofile.picture }}">
@@ -105,7 +105,7 @@
 							{% endif %}
 						{% endfor %}
 						<br><br>
-						<h4>{{ review.text|slice:":300" }}...</h4>
+						<h4>{{ review.text|slice:":250" }}...</h4>
 						</div>
 					</div>
 				   {% if forloop.counter|divisibleby:2 and not forloop.last %}

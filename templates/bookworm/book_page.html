@@ -36,7 +36,7 @@
 		{% if user.is_authenticated %}
 			<a href="review/" class="btn btn-secondary">Write a review</a>
 			<br/><br/>
-			<form role="form"  method="post">
+			<form role="form" method="post">
 				{% csrf_token %}
 				<label>Add this book to your list!</label>
 				<br/>

@@ -36,3 +36,12 @@ class InterestForm(forms.ModelForm):
 	class Meta:
 		model = BookInterest
 		fields = ('status', )
+		
+#Form to change interest in books
+class InterestFormChange(forms.ModelForm):
+	status = forms.IntegerField(required=False)
+	bookid = forms.CharField(required=False)
+
+	class Meta:
+		model = BookInterest
+		fields = ('status', )

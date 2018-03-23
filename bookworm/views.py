@@ -6,7 +6,7 @@ from django.core.urlresolvers import reverse
 from django.contrib.auth.models import User
 from bookworm.books_api import search_query
 from bookworm.models import UserProfile, Book, Review, BookInterest
-from bookworm.forms import UserForm, UserProfileForm, ReviewForm, InterestForm
+from bookworm.forms import UserForm, UserProfileForm, ReviewForm, InterestForm, InterestFormChange
 
 #Displays home page.
 def index(request):
@@ -136,6 +136,15 @@ def reading_list(request, username):
 	except User.DoesNotExist:
 		return redirect('index')
 	reading_data = BookInterest.objects.filter(user=user)
+	if request.method == 'POST':
+				form = InterestFormChange(request.POST)
+				
+				if form.is_valid():
+					bookid = form.cleaned_data['bookid']
+					book_data = Book.objects.get(bookid=bookid)
+					book_interest = BookInterest.objects.get(user=user, book=book_data)
+					book_interest.status = form.cleaned_data['status']
+					book_interest.save()
 	if reading_data:
 		return render(request, 'bookworm/reading_list.html', {'reading_data': reading_data, 'user': user})
 	return render(request, 'bookworm/error.html')

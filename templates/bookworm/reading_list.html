@@ -29,12 +29,21 @@
 			<table>
 			<tr>
 				<th style="text-decoration: underline">Book title</th>
+				<th style="text-decoration: underline">Pages read</th>
 				<th style="text-decoration: underline">Reading status</th>
 				<th style="text-decoration: underline">Change status</th>
 			</tr>
 			{% for data in reading_data %}
 				<tr>
-				<th>{{ data.book.title }} <span style="font-weight:normal;font-size:12px;">by {{ data.book.authors }}</span></th> 
+				<th>
+					<span style="font-size:16px;">{{ data.book.title }}</span>
+					<span style="font-weight:normal;font-size:12px;">&nbsp;by {{ data.book.authors }}</span>
+				</th>
+				<form role="form" method="post">
+					{% csrf_token %}
+				<th>
+				<input type="number" name="pages" min="0" max={{ data.book.pageCount }} value={{ data.pagesread }}>/{{ data.book.pageCount }}
+				</th>
 				{% if data.status == 0 %}
 					<th style="width:250px"><div class="col-7 stat badge-pill badge-primary">{{ data.status }}</div></th>
 				{% elif data.status == 1 %}
@@ -44,8 +53,6 @@
 				{% elif data.status == 3 %}
 					<th style="width:250px"><div class="col-7 stat badge-pill badge-danger">{{ data.status }}</div></th>
 				{% endif %}
-				<form role="form" method="post">
-					{% csrf_token %}
 					<td style="width:220px">
 						<select class="form-control-static.input-lg" id="status" name="status">
 							<option value="0">I'm reading this!</option>
@@ -54,7 +61,7 @@
 							<option value="3">I dropped this...</option>
 						</select>
 						<input type="hidden" value={{ data.book.bookid }} name="bookid" />
-						<button class="btn btn-secondary" type="submit">Submit</button>
+						<button class="btn btn-secondary" type="submit">Change</button>
 					</td>
 				</form>
 				</tr>

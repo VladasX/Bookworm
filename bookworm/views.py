@@ -44,6 +44,7 @@ def book_page(request, bookid):
 				if form.is_valid():
 					book_interest = BookInterest.objects.get_or_create(user=request.user, book=book_data)[0]
 					book_interest.status = form.cleaned_data['status']
+					book_interest.pagesread = 0
 					book_interest.save()
 			else:
 				render(request, 'bookworm/book_page.html', {'book_data': book_data, 'reviews': reviews, 'form': form})
@@ -144,6 +145,7 @@ def reading_list(request, username):
 					book_data = Book.objects.get(bookid=bookid)
 					book_interest = BookInterest.objects.get(user=user, book=book_data)
 					book_interest.status = form.cleaned_data['status']
+					book_interest.pagesread = form.cleaned_data['pages']
 					book_interest.save()
 	if reading_data:
 		return render(request, 'bookworm/reading_list.html', {'reading_data': reading_data, 'user': user})

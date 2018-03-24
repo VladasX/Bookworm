@@ -6,7 +6,7 @@
 
 {% block body_block %}
 {% if selecteduser.username == user.username %}
-	<h1>{{selecteduser.username}}'s Profile</h1>
+	<h1>{{ selecteduser.username }}'s Profile</h1>
 	<div class="row">
 		{% if userprofile.picture %}
 			<img src="{{ MEDIA_URL }}{{ userprofile.picture }}"
@@ -22,8 +22,16 @@
 		<div class="col">
 			<form method="post" action="." enctype="multipart/form-data">
 				{% csrf_token %}
-				{{ form.as_p }}
-				<input type="submit" value="Update" />
+				<h3><label for="Bio">Bio:</label></h3>
+				<textarea class="form-control form" rows="6" id="Bio" name="text" type="text"></textarea>
+				<label style="margin-top:10px" for="favouriteBook">Favourite Book:</label>
+				<select class="form-control-static.input-lg" id="favouriteBook" name="favouriteBook" style="margin-top:10px">
+				{% for readingBook in readingList %}
+						<option value="{{ readingBook.book.bookid }}">{{ readingBook.book.title }}</option>
+				{% endfor %}
+				</select>
+				 <input type="file" class="" name="picture" style="margin-top:10px">
+				<input style="margin-top:15px" type="submit" value="Update" />
 			</form>
 		</div>
 		<div id="edit_profile"></div>

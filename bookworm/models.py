@@ -42,7 +42,7 @@ class UserProfile(models.Model):
 	user = models.OneToOneField(User, primary_key=True)
 	bio = models.CharField(max_length=2000, blank=True)
 	picture = models.ImageField(upload_to='profile_images', blank=True)
-	favouriteBook = models.ForeignKey(ReadingList, null=True)
+	favouriteBook = models.CharField(max_length=256, null=True)
 
 	def __str__(self):
 		return self.user.username

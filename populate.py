@@ -54,8 +54,8 @@ def add_user(username):
 		if book.pageCount:
 			pagesread = book.pageCount
 		add_review(book, newuser, choice(reviews))
-		favouriteBook = ReadingList.objects.get_or_create(user=newuser, book=book, status=2, pagesread=pagesread)[0]
-		UserProfile.objects.get_or_create(user=newuser, bio=choice(biolist), favouriteBook=favouriteBook)[0]
+		ReadingList.objects.get_or_create(user=newuser, book=book, status=2, pagesread=pagesread)[0]
+		UserProfile.objects.get_or_create(user=newuser, bio=choice(biolist), favouriteBook=book.bookid)[0]
 	except:
 		return
 	print("Added User: {0}".format(username))

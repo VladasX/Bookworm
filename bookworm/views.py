@@ -32,6 +32,11 @@ def book_search(request):
 def book_page(request, bookid):
 	book_data = Book.objects.get(bookid=bookid)
 	reviews = Review.objects.filter(book_id=book_data.bookid)
+	stored =  None
+	if request.user.is_authenticated():
+		stored = ReadingList.objects.filter(user=request.user, book=book_data)
+		if stored:
+			stored = stored[0].status
 	if book_data:
 		book_data.pageViews = (book_data.pageViews+1)
 		book_data.save()
@@ -40,17 +45,17 @@ def book_page(request, bookid):
 			form = ReadingListForm()
 			if request.method == 'POST':
 				form = ReadingListForm(request.POST)
-				
 				if form.is_valid():
-					readinglist = ReadingList.objects.get_or_create(user=request.user, book=book_data)[0]
-					readinglist.status = form.cleaned_data['status']
-					readinglist.pagesread = 0
-					readinglist.save()
+					readinglist_data = ReadingList.objects.get_or_create(user=request.user, book=book_data)[0]
+					readinglist_data.status = form.cleaned_data['status']
+					readinglist_data.pagesread = 0
+					readinglist_data.save()
+					stored = readinglist_data.status
 			else:
-				render(request, 'bookworm/book_page.html', {'book_data': book_data, 'reviews': reviews, 'form': form})
+				render(request, 'bookworm/book_page.html', {'book_data': book_data, 'reviews': reviews, 'status': stored, 'form': form})
 		except User.DoesNotExist:
 			return render(request, 'bookworm/book_page.html', {'book_data': book_data, 'reviews': reviews})
-		return render(request, 'bookworm/book_page.html', {'book_data': book_data, 'reviews': reviews, 'form': form})
+		return render(request, 'bookworm/book_page.html', {'book_data': book_data, 'reviews': reviews, 'status': stored, 'form': form})
 	return render(request, 'bookworm/error.html')
 
 #Displays a list of books that are stored in the database.
@@ -132,6 +137,7 @@ def profile_edit(request, username):
 		
 #Allows to see the reading list of a person.
 def reading_list(request, username):
+	statuses = ["I'm reading this!", "I've read this!", "I want to read it!", "I want to read it!", "I dropped this..."]
 	try:
 		user = User.objects.get(username=username)
 	except User.DoesNotExist:
@@ -139,14 +145,13 @@ def reading_list(request, username):
 	reading_data = ReadingList.objects.filter(user=user)
 	if request.method == 'POST':
 				form = ReadingListFormChange(request.POST)
-				
 				if form.is_valid():
 					bookid = form.cleaned_data['bookid']
 					book_data = Book.objects.get(bookid=bookid)
-					readinglist = ReadingList.objects.get(user=user, book=book_data)
-					readinglist.status = form.cleaned_data['status']
-					readinglist.pagesread = form.cleaned_data['pages']
-					readinglist.save()
+					readinglist_data = ReadingList.objects.get(user=user, book=book_data)
+					readinglist_data.status = form.cleaned_data['status']
+					readinglist_data.pagesread = form.cleaned_data['pages']
+					readinglist_data.save()
 	if reading_data:
 		return render(request, 'bookworm/reading_list.html', {'reading_data': reading_data, 'selecteduser': user})
 	return render(request, 'bookworm/error.html')

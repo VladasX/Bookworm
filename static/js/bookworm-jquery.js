@@ -33,3 +33,22 @@ $(function(){
             $('#navsearchbar').show();
       }
  });
+
+function status(n){
+  switch(n){
+    case 0:
+    return "I'm reading this!";
+    case 1:
+    return "I've read this!";
+    case 2:
+    return "I want to read it!";
+    case 3:
+    return "I dropped this...";
+    default:
+    return 0;
+  }
+}
+var es = document.getElementsByClassName("stat");
+for(i = 0; i < es.length; i++){
+  es[i].innerHTML = status(parseInt(es[i].innerHTML));
+}

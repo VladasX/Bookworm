@@ -104,15 +104,17 @@ def profile(request, username):
 		return redirect('index')
 	userprofile = UserProfile.objects.get_or_create(user=user)[0]
 	review = {}
+	book = None
 	if userprofile.favouriteBook:
 		try:
-			review = Review.objects.get(book=userprofile.favouriteBook.book.bookid, user=user)
+			review = Review.objects.get(book=userprofile.favouriteBook, user=user)
 		except:
 			pass
+		book = Book.objects.get(bookid=userprofile.favouriteBook)
 	form = UserProfileForm(
 		{'bio': userprofile.bio, 'picture': userprofile.picture})
 	return render(request, 'bookworm/profile.html',
-		{'userprofile': userprofile, 'selecteduser': user, 'form': form, 'review': review})
+		{'userprofile': userprofile, 'selecteduser': user, 'form': form, 'book': book, 'review': review})
 
 #Allows them to edit their user profile.
 @login_required
@@ -122,6 +124,7 @@ def profile_edit(request, username):
 	except User.DoesNotExist:
 		return redirect('index')
 	userprofile = UserProfile.objects.get_or_create(user=user)[0]
+	reading_data = ReadingList.objects.filter(user=user)
 	form = UserProfileForm(
 		{'bio': userprofile.bio, 'picture': userprofile.picture})
 	if request.method == 'POST':
@@ -129,15 +132,12 @@ def profile_edit(request, username):
 		if form.is_valid():
 			form.save(commit=True)
 			return redirect('profile_edit', user.username)
-		else:
-			print(form.errors)
 	return render(request, 'bookworm/profile_edit.html',
-		{'userprofile': userprofile, 'selecteduser': user, 'form': form})
+		{'userprofile': userprofile, 'selecteduser': user, 'readingList': reading_data, 'form': form})
 		
 		
 #Allows to see the reading list of a person.
 def reading_list(request, username):
-	statuses = ["I'm reading this!", "I've read this!", "I want to read it!", "I want to read it!", "I dropped this..."]
 	try:
 		user = User.objects.get(username=username)
 	except User.DoesNotExist:

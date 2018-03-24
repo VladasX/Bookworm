@@ -14,6 +14,7 @@ class UserForm(forms.ModelForm):
 class UserProfileForm(forms.ModelForm):
 	bio = forms.CharField(required=False)
 	picture = forms.ImageField(required=False)
+	favouriteBook = forms.CharField(required=False)
 
 	class Meta:
 		model = UserProfile

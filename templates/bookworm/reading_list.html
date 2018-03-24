@@ -11,7 +11,11 @@
 	td, th
 	tr:nth-child(even)
 	</style>
-	<h2><span style="margin-left:15px">Welcome to {{ user.username }}'s reading list!</span></h2>
+	{% if selecteduser.username == user.username %}
+		<h2><span style="margin-left:15px">Your reading list!</span></h2>
+	{% else %}
+		<h2><span style="margin-left:15px">Welcome to {{ user.username }}'s reading list!</span></h2>
+	{% endif %}
 	<div class="container">
 		{% if reading_data %}
 			<table>
@@ -19,7 +23,9 @@
 				<th style="text-decoration: underline">Book title</th>
 				<th style="text-decoration: underline">Pages read</th>
 				<th style="text-decoration: underline">Reading status</th>
-				<th style="text-decoration: underline">Change status</th>
+				{% if selecteduser.username == user.username %}
+					<th style="text-decoration: underline">Change status</th>
+				{% endif %}
 			</tr>
 			{% for data in reading_data %}
 				<tr>
@@ -27,10 +33,11 @@
 					<span style="font-size:16px;">{{ data.book.title }}</span>
 					<span style="font-weight:normal;font-size:12px;">&nbsp;by {{ data.book.authors }}</span>
 				</th>
+				{% if selecteduser.username == user.username %}
 				<form role="form" method="post">
 					{% csrf_token %}
 				<th style="width:140px">
-				<input type="number" name="pages" min="0" max={{ data.book.pageCount }} value={{ data.pagesread }}>/{{ data.book.pageCount }}
+					<input style="width:50px" type="number" name="pages" min="0" max={{ data.book.pageCount }} value={{ data.pagesread }}>/{{ data.book.pageCount }}
 				</th>
 				{% if data.status == 0 %}
 					<th style="width:250px"><div class="col-7 stat badge-pill badge-primary">{{ data.status }}</div></th>
@@ -52,6 +59,20 @@
 						<button class="btn btn-secondary" type="submit">Change</button>
 					</td>
 				</form>
+				{% else %}
+					<th>
+						{{ data.pagesread }}/{{ data.book.pageCount }}
+					</th>
+					{% if data.status == 0 %}
+						<th style="width:250px"><div class="col-7 stat badge-pill badge-primary">{{ data.status }}</div></th>
+					{% elif data.status == 1 %}
+						<th style="width:250px"><div class="col-7 stat badge-pill badge-success">{{ data.status }}</div></th>
+					{% elif data.status == 2 %}
+						<th style="width:250px"><div class="col-7 stat badge-pill badge-warning">{{ data.status }}</div></th>
+					{% elif data.status == 3 %}
+						<th style="width:250px"><div class="col-7 stat badge-pill badge-danger">{{ data.status }}</div></th>
+					{% endif %}
+				{% endif %}
 				</tr>
 			{% endfor %}
 			</table>
@@ -73,9 +94,7 @@
 				default:
 				return 0;
 			}
-		
 		}
-		
 		var es = document.getElementsByClassName("stat");
 		for(i = 0; i < es.length; i++){
 			es[i].innerHTML = status(parseInt(es[i].innerHTML));

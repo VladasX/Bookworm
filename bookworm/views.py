@@ -37,15 +37,15 @@ def book_page(request, bookid):
 		book_data.save()
 		try:
 			user = User.objects.get(username=request.user.username)
-			form = InterestForm()
+			form = ReadingListForm()
 			if request.method == 'POST':
-				form = InterestForm(request.POST)
+				form = ReadingListForm(request.POST)
 				
 				if form.is_valid():
-					book_interest = BookInterest.objects.get_or_create(user=request.user, book=book_data)[0]
-					book_interest.status = form.cleaned_data['status']
-					book_interest.pagesread = 0
-					book_interest.save()
+					readinglist = ReadingList.objects.get_or_create(user=request.user, book=book_data)[0]
+					readinglist.status = form.cleaned_data['status']
+					readinglist.pagesread = 0
+					readinglist.save()
 			else:
 				render(request, 'bookworm/book_page.html', {'book_data': book_data, 'reviews': reviews, 'form': form})
 		except User.DoesNotExist:
@@ -136,17 +136,17 @@ def reading_list(request, username):
 		user = User.objects.get(username=username)
 	except User.DoesNotExist:
 		return redirect('index')
-	reading_data = BookInterest.objects.filter(user=user)
+	reading_data = ReadingList.objects.filter(user=user)
 	if request.method == 'POST':
-				form = InterestFormChange(request.POST)
+				form = ReadingListFormChange(request.POST)
 				
 				if form.is_valid():
 					bookid = form.cleaned_data['bookid']
 					book_data = Book.objects.get(bookid=bookid)
-					book_interest = BookInterest.objects.get(user=user, book=book_data)
-					book_interest.status = form.cleaned_data['status']
-					book_interest.pagesread = form.cleaned_data['pages']
-					book_interest.save()
+					readinglist = ReadingList.objects.get(user=user, book=book_data)
+					readinglist.status = form.cleaned_data['status']
+					readinglist.pagesread = form.cleaned_data['pages']
+					readinglist.save()
 	if reading_data:
-		return render(request, 'bookworm/reading_list.html', {'reading_data': reading_data, 'user': user})
+		return render(request, 'bookworm/reading_list.html', {'reading_data': reading_data, 'selecteduser': user})
 	return render(request, 'bookworm/error.html')

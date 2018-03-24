@@ -29,7 +29,7 @@ class ReviewForm(forms.ModelForm):
 		fields = ('text', 'rating', )
 		
 
-#Form for interest in books
+#Form for reading list.
 class ReadingListForm(forms.ModelForm):
 	status = forms.IntegerField(required=False)
 
@@ -37,7 +37,7 @@ class ReadingListForm(forms.ModelForm):
 		model = ReadingList
 		fields = ('status', )
 		
-#Form to change interest in books
+#Form to change a book in the reading list.
 class ReadingListFormChange(forms.ModelForm):
 	status = forms.IntegerField(required=False)
 	bookid = forms.CharField(required=False)

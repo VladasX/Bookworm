@@ -6,30 +6,30 @@
 
 {% block body_block %}
 {% if selecteduser.username == user.username %}
-<h1>{{selecteduser.username}}'s Profile</h1>
-<div class="row">
-	{% if userprofile.picture %}
-		<img src="{{ MEDIA_URL }}{{ userprofile.picture }}"
-			width="300"
-			height="300"
-			alt="{{ selecteduser.username}}" />
-	{% else %}
-		<div class="col-4">
-			<img src="{% static 'images/default_avatar.png' %}"> 
+	<h1>{{selecteduser.username}}'s Profile</h1>
+	<div class="row">
+		{% if userprofile.picture %}
+			<img src="{{ MEDIA_URL }}{{ userprofile.picture }}"
+				width="300"
+				height="300"
+				alt="{{ selecteduser.username}}" />
+		{% else %}
+			<div class="col-4">
+				<img src="{% static 'images/default_avatar.png' %}"> 
+			</div>
+		{% endif %}
+		<font size="4">
+		<div class="col">
+			<form method="post" action="." enctype="multipart/form-data">
+				{% csrf_token %}
+				{{ form.as_p }}
+				<input type="submit" value="Update" />
+			</form>
 		</div>
-	{% endif %}
-	<font size="4">
-	<div class="col">
-		<form method="post" action="." enctype="multipart/form-data">
-			{% csrf_token %}
-			{{ form.as_p }}
-			<input type="submit" value="Update" />
-		</form>
+		<div id="edit_profile"></div>
+		</font>
 	</div>
-	<div id="edit_profile"></div>
-	</font>
-</div>
 {% else %}
-<p>You can not edit someone else's profile</p>
+	<p>You can not edit someone else's profile</p>
 {% endif %}
 {% endblock %}

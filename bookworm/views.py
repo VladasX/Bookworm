@@ -5,8 +5,8 @@ from django.contrib.auth.decorators import login_required
 from django.core.urlresolvers import reverse
 from django.contrib.auth.models import User
 from bookworm.books_api import search_query
-from bookworm.models import UserProfile, Book, Review, BookInterest
-from bookworm.forms import UserForm, UserProfileForm, ReviewForm, InterestForm, InterestFormChange
+from bookworm.models import UserProfile, Book, Review, ReadingList
+from bookworm.forms import UserForm, UserProfileForm, ReviewForm, ReadingListForm, ReadingListFormChange
 
 #Displays home page.
 def index(request):

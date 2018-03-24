@@ -7,21 +7,9 @@
 {% block body_block %}
 
 	<style>
-	table {
-		font-family: arial, sans-serif;
-		border-collapse: collapse;
-		width: 100%;
-	}
-
-	td, th {
-    border: 1px solid #dddddd;
-    text-align: left;
-    padding: 8px;
-	}
-
-	tr:nth-child(even) {
-    background-color: #dddddd;
-	}
+	table
+	td, th
+	tr:nth-child(even)
 	</style>
 	<h2><span style="margin-left:15px">Welcome to {{ user.username }}'s reading list!</span></h2>
 	<div class="container">
@@ -92,6 +80,5 @@
 		for(i = 0; i < es.length; i++){
 			es[i].innerHTML = status(parseInt(es[i].innerHTML));
 		}
-	
 	</script>
 {% endblock %}

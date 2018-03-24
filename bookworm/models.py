@@ -27,8 +27,8 @@ class Review(models.Model):
 	timestamp = models.DateTimeField(auto_now=True)
 	rating = models.IntegerField(default=0)
 
-#Model for interest in a book.
-class BookInterest(models.Model):
+#Model for reading list.
+class ReadingList(models.Model):
 	user = models.ForeignKey(User)
 	book = models.ForeignKey(Book)
 	status = models.IntegerField(default=0)
@@ -42,7 +42,7 @@ class UserProfile(models.Model):
 	user = models.OneToOneField(User, primary_key=True)
 	bio = models.CharField(max_length=2000, blank=True)
 	picture = models.ImageField(upload_to='profile_images', blank=True)
-	favouriteBook = models.ForeignKey(BookInterest, null=True)
+	favouriteBook = models.ForeignKey(ReadingList, null=True)
 
 	def __str__(self):
 		return self.user.username

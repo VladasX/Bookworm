@@ -1,6 +1,6 @@
 from django import forms
 from django.contrib.auth.models import User
-from bookworm.models import UserProfile, Review, BookInterest
+from bookworm.models import UserProfile, Review, ReadingList
 
 #Form for user accounts.
 class UserForm(forms.ModelForm):
@@ -30,19 +30,19 @@ class ReviewForm(forms.ModelForm):
 		
 
 #Form for interest in books
-class InterestForm(forms.ModelForm):
+class ReadingListForm(forms.ModelForm):
 	status = forms.IntegerField(required=False)
 
 	class Meta:
-		model = BookInterest
+		model = ReadingList
 		fields = ('status', )
 		
 #Form to change interest in books
-class InterestFormChange(forms.ModelForm):
+class ReadingListFormChange(forms.ModelForm):
 	status = forms.IntegerField(required=False)
 	bookid = forms.CharField(required=False)
 	pages = forms.IntegerField(required=False)
 
 	class Meta:
-		model = BookInterest
+		model = ReadingList
 		fields = ('status', )

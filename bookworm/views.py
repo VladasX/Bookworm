@@ -154,4 +154,4 @@ def reading_list(request, username):
 					readinglist_data.save()
 	if reading_data:
 		return render(request, 'bookworm/reading_list.html', {'reading_data': reading_data, 'selecteduser': user})
-	return render(request, 'bookworm/error.html')
+	return render(request, 'bookworm/reading_list.html', {'reading_data': {}, 'selecteduser': user})

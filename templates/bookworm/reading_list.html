@@ -31,7 +31,7 @@
 				<tr>
 				<th>
 					<span style="font-size:16px;">{{ data.book.title }}</span>
-					<span style="font-weight:normal;font-size:12px;">&nbsp;by {{ data.book.authors }}</span>
+					<span style="font-weight:normal;font-size:12px;margin-left:-4px">&nbsp;by {{ data.book.authors }}</span>
 				</th>
 				{% if selecteduser.username == user.username %}
 				<form role="form" method="post">
@@ -76,7 +76,8 @@
 				</tr>
 			{% endfor %}
 			</table>
-			
+		{% else %}
+		<h4>You currently don't have any books in your reading list, please add some if you wish them to show here.</h4>
 		{% endif %}
 	</div>	
 {% endblock %}

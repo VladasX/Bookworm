@@ -14,14 +14,14 @@ Then, it is recommended that you create a virtual environment to hold the Python
 
 **Linux and MacOS:**
 ```
-$ python -m venv venv
-$ source venv/bin/activate
+$ virtualenv Bookworm
+$ source Bookworm/bin/activate
 ```
 
 **Windows:**
 ```
-$ python -m venv venv
-$ venv\Scripts\activate.bat
+$ python -m venv Bookworm
+$ Bookworm\Scripts\activate.bat
 ```
 
 Next, you'll want to install the Python dependencies into your virtual environment using pip.

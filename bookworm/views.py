@@ -128,6 +128,9 @@ def reading_list(request, username):
 					readinglist_data.pagesread = form.cleaned_data['pages']
 					if readinglist_data.pagesread and readinglist_data.pagesread == book_data.pageCount:
 						readinglist_data.status = 1
+					elif readinglist_data.pagesread and readinglist_data.pagesread > book_data.pageCount:
+						readinglist_data.pagesread = book_data.pageCount
+						readinglist_data.status = 1
 					readinglist_data.save()
 	if reading_data:
 		return render(request, 'bookworm/reading_list.html', {'reading_data': reading_data, 'selecteduser': user})

@@ -46,7 +46,7 @@
 					<!-- Allows them to set how many pages they have read of the book if it's their reading list. -->
 					{% if selecteduser.username == user.username %}
 						<th style="width:140px">
-							<input style="width:50px" type="number" name="pages" min="0" max={{ data.book.pageCount }} value={{ data.pagesread }}>/{{ data.book.pageCount }}
+							<input style="width:50px" onchange="this.form.submit();" type="number" name="pages" min="0" max={{ data.book.pageCount }} value={{ data.pagesread }}>/{{ data.book.pageCount }}
 						</th>
 					{% else %}
 						<th>
@@ -70,15 +70,14 @@
 				{% endif %}
 				{% if selecteduser.username == user.username %}
 						<!-- Allows them to change the status of the book. -->
-						<td style="width:240px">
-							<select class="form-control-static.input-lg" id="status" name="status">
+						<td style="width:150px">
+							<select class="form-control-static.input-lg" id="status" name="status" onchange="this.form.submit();">
 								<option value="0">I'm reading this!</option>
 								<option value="1">I've read this!</option>
 								<option value="2">I want to read it!</option>
 								<option value="3">I dropped this...</option>
 							</select>
 							<input type="hidden" value={{ data.book.bookid }} name="bookid" />
-							<button class="btn btn-secondary" type="submit">Change</button>
 							</form>
 						</td>
 				{% endif %}

@@ -17,10 +17,6 @@ def index(request):
 	recent_reviewed = Review.objects.order_by("-timestamp")[:12]
 	return render(request, 'bookworm/index.html', {'highest_rated': highest_rated, 'most_viewed': most_viewed, 'recent_reviewed': recent_reviewed})
 
-#Displays FAQ page.
-def faq(request):
-	return render(request, 'bookworm/faq.html')
-
 #Gets a list of books based on a user's query and displays it.
 def book_search(request):
 	result_list = []

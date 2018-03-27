@@ -13,7 +13,6 @@ urlpatterns = [
     url(r'^$', views.index, name='index'),
     url(r'^index/$', views.index, name='index'),
     url(r'^home/$', views.index, name='index'),
-	url(r'^faq/$', views.faq, name='faq'),
     url(r'^search/$', views.book_search, name='book_search'),
     url(r'^books/page-(?P<pages>[0-9]+)/$', views.book_list, name='book_list'),
     url(r'^books/page-(?P<pages>[0-9]+)/(?P<sort>[\w\-]+)/$', views.book_list, name='book_list'),

@@ -4,6 +4,7 @@ from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
 from django.core.urlresolvers import reverse
 from django.contrib.auth.models import User
+from django.db.models import F
 from bookworm.books_api import search_query
 from bookworm.models import UserProfile, Book, Review, ReadingList
 from bookworm.forms import UserForm, UserProfileForm, ReviewForm, ReadingListForm, ReadingListFormChange
@@ -61,10 +62,10 @@ def book_list(request, pages, sort=None):
 	if sort in ["title", "authors", "publishedDate", "averageRating", "pageCount", "pageViews"]:
 		# This will be sorted in alphabetical order.
 		if sort in ["title", "authors"]:
-			books = Book.objects.order_by("{}".format(sort))
+			books = Book.objects.order_by(F("{}".format(sort)).asc(nulls_last=True))
 		# Everything numerical will be sorted in descending order.
 		else:
-			books = Book.objects.order_by("-{}".format(sort))
+			books = Book.objects.order_by(F("{}".format(sort)).desc(nulls_last=True))
 	else:
 		books = Book.objects.all()
 	start = (int(pages)-1)*12

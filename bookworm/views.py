@@ -135,6 +135,13 @@ def reading_list(request, username):
 	if reading_data:
 		return render(request, 'bookworm/reading_list.html', {'reading_data': reading_data, 'selecteduser': user})
 	return render(request, 'bookworm/reading_list.html', {'reading_data': {}, 'selecteduser': user})
+	
+def delete(request, username, bookid):
+	user = User.objects.get(username=username)
+	book_data = Book.objects.get(bookid=bookid)
+	data = ReadingList.objects.filter(user=user, book=book_data)
+	data.delete()
+	return HttpResponseRedirect('/reading_list/{}'.format(username))
 
 #Displays a user's profile.
 def profile(request, username):

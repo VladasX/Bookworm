@@ -24,6 +24,7 @@ urlpatterns = [
     url(r'^profile/(?P<username>[\w\-]+)/$', views.profile, name='profile'),
     url(r'^profile_edit/(?P<username>[\w\-]+)/$', views.profile_edit, name='profile_edit'),
 	url(r'^reading_list/(?P<username>[\w\-]+)/$', views.reading_list, name='reading_list'),
+	url(r'^reading_list/(?P<username>[\w\-]+)/delete/(?P<bookid>[\w\-]+)$', views.delete, name='delete'),
     url(r'^ajax/validate_username/$', views.validate_username, name='validate_username'),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 

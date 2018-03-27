@@ -14,7 +14,7 @@
 	{% if selecteduser.username == user.username %}
 		<h2><span style="margin-left:15px">Your reading list!</span></h2>
 	{% else %}
-		<h2><span style="margin-left:15px">Welcome to {{ user.username }}'s reading list!</span></h2>
+		<h2><span style="margin-left:15px">Welcome to {{ selecteduser.username }}'s reading list!</span></h2>
 	{% endif %}
 	<div class="container">
 		<!-- Displays their reading list in a table. -->
@@ -26,6 +26,7 @@
 				<th style="text-decoration: underline">Reading status</th>
 				{% if selecteduser.username == user.username %}
 					<th style="text-decoration: underline">Change status</th>
+					<th style="text-decoration: underline">Remove?</th>
 				{% endif %}
 			</tr>
 			{% for data in reading_data %}
@@ -79,6 +80,9 @@
 							</select>
 							<input type="hidden" value={{ data.book.bookid }} name="bookid" />
 							</form>
+						</td>
+						<td style="width:60px">
+							<center><a href="/reading_list/{{ user.username }}/delete/{{ data.book.bookid }}"><img src="{% static 'images/delete.png' %}"></a></center>
 						</td>
 				{% endif %}
 				</tr>

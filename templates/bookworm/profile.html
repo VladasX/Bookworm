@@ -27,12 +27,12 @@
 		{% if book %}
 			<div class="col-md-3 col-md-offset-2">
 				<h1 align="center">Favourite Book</h1>
-					<div class="card mb-2 box-shadow"><a href="/book/{{ book.bookid }}">
+					<div class="card mb-2 box-shadow"><a href="{% url 'book_page' book.bookid %}">
 						<img class="card-img-top" src="{{ book.thumbnail }}" alt="Bookcover"></a>
 						<div class="card-body">
 							<h5>{{ book.title }}</h5>
 								<div class="d-flex justify-content-center align-items-center">
-										<div class="btn-group"><a href="/book/{{ book.bookid }}">
+										<div class="btn-group"><a href="{% url 'book_page' book.bookid %}">
 											<button class="btn btn-sm btn-outline-secondary" type="button">View</button></a>
 											<!-- Triggers a dialog box/popup window to show book's description -->
 											<button class="btn btn-sm btn-outline-secondary" type="button" data-title="{{ book.title }}" data-desc="{{ book.description }}" data-toggle="modal" data-target="#book-modal">Description</button> 

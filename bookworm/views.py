@@ -61,8 +61,11 @@ def book_page(request, bookid):
 	return render(request, 'bookworm/error.html')
 
 #Displays a list of books that are stored in the database.
-def book_list(request, pages):
-	books = Book.objects.all()
+def book_list(request, pages, sort=None):
+	if sort in ["title", "authors", "publishedDate", "averageRating", "pageCount"]:
+		books = Book.objects.order_by("-{}".format(sort), "-pageViews")
+	else:
+		books = Book.objects.all()
 	start = (int(pages)-1)*12
 	next = int(pages)+1
 	previous = int(pages)-1

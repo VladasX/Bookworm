@@ -17,7 +17,7 @@ class Book(models.Model):
 	pageViews = models.IntegerField(default=0)
 
 	class Meta:
-   		ordering = ['-averageRating', '-pageViews']
+   		ordering = ['-pageViews', '-averageRating']
 
 #Model for reviews stored.
 class Review(models.Model):

@@ -16,6 +16,7 @@ urlpatterns = [
 	url(r'^faq/$', views.faq, name='faq'),
     url(r'^search/$', views.book_search, name='book_search'),
     url(r'^books/page-(?P<pages>[0-9]+)/$', views.book_list, name='book_list'),
+    url(r'^books/page-(?P<pages>[0-9]+)/(?P<sort>[\w\-]+)/$', views.book_list, name='book_list'),
     url(r'^book/(?P<bookid>[\w\-]+)/$', views.book_page, name='book_page'),
     url(r'^book/(?P<bookid>[\w\-]+)/review/$', views.add_review, name='add_review'),
     url(r'^accounts/register/$', MyRegistrationView.as_view(), name='registration_register'),

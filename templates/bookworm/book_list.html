@@ -11,14 +11,14 @@
 			{% for book in books %}
 			<div class="col-md-3">
 				<div class="card mb-3 box-shadow">
-					<a href="/book/{{ book.bookid }}">
+					<a href="{% url 'book_page' book.bookid %}">
 						<img class="card-img-top" src="{{ book.thumbnail }}" alt="Bookcover">
 					</a>
 					<div class="card-body">
 						<p class="card-text"><h5>{{ book.title }}</h5></p>
 						<div class="d-flex justify-content-between align-items-center">
 							<div class="btn-group">
-								<a href="/book/{{ book.bookid }}"><button type="button" class="btn btn-sm btn-outline-secondary">View</button></a>
+								<a href="{% url 'book_page' book.bookid %}"><button type="button" class="btn btn-sm btn-outline-secondary">View</button></a>
 								
 								<!-- Triggers a dialog box/popup window to show book's description -->
 								<button type="button" class="btn btn-sm btn-outline-secondary" data-title="{{ book.title }}" data-desc="{{ book.description }}" 

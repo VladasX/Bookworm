@@ -14,8 +14,8 @@
 				<div class="item active">
 				{% for book in highest_rated %}
 					<div class="col-sm-3">
-						<a href="/book/{{ book.bookid }}"><img src="{{ book.thumbnail }}"/></a>
-						<center><h4><b><a href="/book/{{ book.bookid }}">{{ book.title }}</a></b></h4></center>
+						<a href="{% url 'book_page' book.bookid %}"><img src="{{ book.thumbnail }}"/></a>
+						<center><h4><b><a href="{% url 'book_page' book.bookid %}">{{ book.title }}</a></b></h4></center>
 					</div>
 				   {% if forloop.counter|divisibleby:4 and not forloop.last %}
 				   </div>
@@ -47,8 +47,8 @@
 				<div class="item active">
 				{% for book in most_viewed %}
 					<div class="col-sm-3">
-						<a href="/book/{{ book.bookid }}"><img src="{{ book.thumbnail }}"/></a>
-						<center><h4><b><a href="/book/{{ book.bookid }}">{{ book.title }}</a></b></h4></center>
+						<a href="{% url 'book_page' book.bookid %}"><img src="{{ book.thumbnail }}"/></a>
+						<center><h4><b><a href="{% url 'book_page' book.bookid %}">{{ book.title }}</a></b></h4></center>
 					</div>
 				   {% if forloop.counter|divisibleby:4 and not forloop.last %}
 				   </div>
@@ -81,18 +81,18 @@
 				{% for review in recent_reviewed %}
 					<div class="col-sm-6">
 						<div class="col-sm-6">
-						<a href="/book/{{ review.book.bookid }}"><img src="{{ review.book.thumbnail }}"/></a>
+						<a href="{% url 'book_page' review.book.bookid %}"><img src="{{ review.book.thumbnail }}"/></a>
 						</div>
 						<div class="col-sm-6">
 						<center>
 						<p style="font-size:22px"><b>{{ review.book.title }}</b></p>
 						</center>
+						<a href="{% url 'profile' review.user.username %}">
 						{% if review.user.userprofile.picture %}
 							<img style="float: left; width:65px;height:65px" src="{{ MEDIA_URL }}{{ review.user.userprofile.picture }}">
 						{% else %}
 							<img style="float: left; width:65px;height:65px" src="{% static 'images/default_avatar.png' %}">
 						{% endif %}
-						<a href="/profile/{{ review.user.username }}">
 						<font size="5" style="margin-left:5px;">{{ review.user }}</font>
 						</a>
 						<br>

@@ -59,7 +59,7 @@ def book_page(request, bookid):
 	return render(request, 'bookworm/error.html')
 
 #Displays a list of books that are stored in the database.
-def book_list(request): #Maybe add the ability to allow them to sort the list.
+def book_list(request):
 	books = Book.objects.all()
 	return render(request, "bookworm/book_list.html", {'books': books})
 

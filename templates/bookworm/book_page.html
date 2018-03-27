@@ -36,6 +36,7 @@
 		{% if user.is_authenticated %}
 		<div class="form-group form-inline" style="margin-bottom:-40px">
 			<a href="review/" class="btn btn-secondary">Write a review</a>
+			<!-- Displays user's reading list status for the book if one exists. -->
 			{% if status == 0 %}
 				<div class="col-7 stat badge-pill badge-primary" style="max-width:150px;margin-left:10px;display:block">{{ status }}</div>
 			{% elif status == 1 %}
@@ -47,6 +48,7 @@
 			{% endif %}
 			</div>
 			<br/><br/>
+			<!-- Form to allow the user to add it to their reading list. -->
 			<form role="form" method="post">
 				{% csrf_token %}
 				<label>Add this book to your list!</label>
@@ -64,6 +66,7 @@
 		</font>
 	</div>
 </div>
+<!-- Displays all the reviews for the book. -->
 {% if reviews %}
 	<h2><b>Reviews:</b></h2>
 	<div class="row">

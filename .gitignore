@@ -1,5 +1,6 @@
 .DS_Store
 *.pyc
+db.sqlite3
+wad2_project/settings.py
 .idea/
 bookworm/migrations/
-wad2_project/settings.py

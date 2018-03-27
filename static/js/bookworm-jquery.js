@@ -34,6 +34,7 @@ $(function(){
       }
  });
 
+//Used to replace the status code with its corresponding string.
 function status(n){
   switch(n){
     case 0:

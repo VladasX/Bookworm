@@ -6,6 +6,7 @@
 
 {% block body_block %}
 {% if selecteduser.username == user.username %}
+	<!-- Display's their current profile picture. -->
 	<h1>{{ selecteduser.username }}'s Profile</h1>
 	<div class="row">
 		{% if userprofile.picture %}
@@ -20,6 +21,7 @@
 		{% endif %}
 		<font size="4">
 		<div class="col">
+			<!-- Form to allow user to set their profile picture, bio and favourite book. -->
 			<form method="post" action="." enctype="multipart/form-data">
 				{% csrf_token %}
 				<h3><label for="Bio">Bio:</label></h3>

@@ -17,6 +17,7 @@
 		<h2><span style="margin-left:15px">Welcome to {{ user.username }}'s reading list!</span></h2>
 	{% endif %}
 	<div class="container">
+		<!-- Displays their reading list in a table. -->
 		{% if reading_data %}
 			<table>
 			<tr>
@@ -33,12 +34,19 @@
 					<span style="font-size:16px;">{{ data.book.title }}</span>
 					<span style="font-weight:normal;font-size:12px;margin-left:-4px">&nbsp;by {{ data.book.authors }}</span>
 				</th>
+				<!-- Allows them to set how many pages they have read of the book if it's their reading list. -->
 				{% if selecteduser.username == user.username %}
-				<form role="form" method="post">
-					{% csrf_token %}
-				<th style="width:140px">
-					<input style="width:50px" type="number" name="pages" min="0" max={{ data.book.pageCount }} value={{ data.pagesread }}>/{{ data.book.pageCount }}
-				</th>
+					<form role="form" method="post">
+						{% csrf_token %}
+					<th style="width:140px">
+						<input style="width:50px" type="number" name="pages" min="0" max={{ data.book.pageCount }} value={{ data.pagesread }}>/{{ data.book.pageCount }}
+					</th>
+				{% else %}
+					<th>
+						{{ data.pagesread }}/{{ data.book.pageCount }}
+					</th>
+				{% endif %}
+				<!-- Sets the badge depending on what the status of the book is. -->
 				{% if data.status == 0 %}
 					<th style="width:250px"><div class="col-7 stat badge-pill badge-primary">{{ data.status }}</div></th>
 				{% elif data.status == 1 %}
@@ -48,30 +56,19 @@
 				{% elif data.status == 3 %}
 					<th style="width:250px"><div class="col-7 stat badge-pill badge-danger">{{ data.status }}</div></th>
 				{% endif %}
-					<td style="width:240px">
-						<select class="form-control-static.input-lg" id="status" name="status">
-							<option value="0">I'm reading this!</option>
-							<option value="1">I've read this!</option>
-							<option value="2">I want to read it!</option>
-							<option value="3">I dropped this...</option>
-						</select>
-						<input type="hidden" value={{ data.book.bookid }} name="bookid" />
-						<button class="btn btn-secondary" type="submit">Change</button>
-					</td>
-				</form>
-				{% else %}
-					<th>
-						{{ data.pagesread }}/{{ data.book.pageCount }}
-					</th>
-					{% if data.status == 0 %}
-						<th style="width:250px"><div class="col-7 stat badge-pill badge-primary">{{ data.status }}</div></th>
-					{% elif data.status == 1 %}
-						<th style="width:250px"><div class="col-7 stat badge-pill badge-success">{{ data.status }}</div></th>
-					{% elif data.status == 2 %}
-						<th style="width:250px"><div class="col-7 stat badge-pill badge-warning">{{ data.status }}</div></th>
-					{% elif data.status == 3 %}
-						<th style="width:250px"><div class="col-7 stat badge-pill badge-danger">{{ data.status }}</div></th>
-					{% endif %}
+				{% if selecteduser.username == user.username %}
+						<!-- Allows them to change the status of the book. -->
+						<td style="width:240px">
+							<select class="form-control-static.input-lg" id="status" name="status">
+								<option value="0">I'm reading this!</option>
+								<option value="1">I've read this!</option>
+								<option value="2">I want to read it!</option>
+								<option value="3">I dropped this...</option>
+							</select>
+							<input type="hidden" value={{ data.book.bookid }} name="bookid" />
+							<button class="btn btn-secondary" type="submit">Change</button>
+							</form>
+						</td>
 				{% endif %}
 				</tr>
 			{% endfor %}

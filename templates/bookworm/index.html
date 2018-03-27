@@ -5,6 +5,7 @@
 {% endblock %}
 
 {% block body_block %}
+<!-- Display's highest rated books in a carousel. -->
 {% if highest_rated %}
 	<h1>Highest Rated:</h1>
 	<div class="row">   
@@ -37,6 +38,7 @@
 	<h4>There are currently no books in the database.</h4>
 {% endif %}
 
+<!-- Display's most viewed books in a carousel. -->
 {% if most_viewed %}
 	<h1>Most Viewed:</h1>
 	<div class="row">   
@@ -69,6 +71,7 @@
 	<h4>There are currently no books in the database.</h4>
 {% endif %}
 
+<!-- Display's recently reviewed books in a carousel. -->
 {% if recent_reviewed %}
 	<h1>Latest reviews:</h1>
 	<div class="row">   

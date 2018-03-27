@@ -8,6 +8,7 @@
 
 <div class="row">
 	<div class="col-4 col-md-offset-1">
+		<!-- Shows the user's profile. -->
 		<h1>{{ selecteduser.username }}'s Profile</h1>
 		{% if userprofile.picture %} 
 			<img src="{{ MEDIA_URL }}{{ userprofile.picture }}" 
@@ -20,8 +21,9 @@
 			<p><strong><span class="imagetext">
 			Bio:</span></strong> {% if userprofile.bio %} <a>{{userprofile.bio}}</a></p>
 		{% else %} 
-			<a>This user hasn't set a bio yet.</a> 
+			<a>This user hasn't set a bio yet.</a>
 		{% endif %}</div>
+		<!-- Displays their favourite book if one exists. -->
 		{% if book %}
 			<div class="col-md-3 col-md-offset-2">
 				<h1 align="center">Favourite Book</h1>

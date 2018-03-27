@@ -62,8 +62,13 @@ def book_page(request, bookid):
 
 #Displays a list of books that are stored in the database.
 def book_list(request, pages, sort=None):
-	if sort in ["title", "authors", "publishedDate", "averageRating", "pageCount"]:
-		books = Book.objects.order_by("-{}".format(sort), "-pageViews")
+	if sort in ["title", "authors", "publishedDate", "averageRating", "pageCount", "pageViews"]:
+		# This will be sorted in alphabetical order.
+		if sort in ["title", "authors"]:
+			books = Book.objects.order_by("{}".format(sort))
+		# Everything numerical will be sorted in descending order.
+		else:
+			books = Book.objects.order_by("-{}".format(sort))
 	else:
 		books = Book.objects.all()
 	start = (int(pages)-1)*12
@@ -71,7 +76,7 @@ def book_list(request, pages, sort=None):
 	previous = int(pages)-1
 	last = ceil(len(books)/12)
 	return render(request, "bookworm/book_list.html", 
-	{'books': books[start:start+12], 'range': range(ceil(len(books)/12)), 'next': next, 'previous': previous, 'last': last, 'currentpage': int(pages)})
+	{'books': books[start:start+12], 'range': range(ceil(len(books)/12)), 'next': next, 'previous': previous, 'last': last, 'currentpage': int(pages), 'sort': sort})
 
 #Allows a user to add a review for a book.
 @login_required

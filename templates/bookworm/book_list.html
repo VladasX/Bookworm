@@ -5,7 +5,21 @@
 {% endblock %}
 
 {% block body_block %}
-	<h1>Books</h1>
+	<h1>Books
+		<div class="btn-group pull-right">
+			<button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
+				Sort by
+			</button>
+			<ul class="dropdown-menu" role="menu">
+				<li><a href="{% url 'book_list' 1 'pageViews' %}">Views</a></li>
+				<li><a href="{% url 'book_list' 1 'averageRating' %}">Average rating</a></li>
+				<li><a href="{% url 'book_list' 1 'publishedDate' %}">Published date</a></li>
+				<li><a href="{% url 'book_list' 1 'pageCount' %}">Book's length</a></li>
+				<li><a href="{% url 'book_list' 1 'title' %}">Title</a></li>
+				<li><a href="{% url 'book_list' 1 'authors' %}">Authors</a></li>
+			</ul>
+		</div>
+	</h1>
 	{% if books %}
 		<div class="row">
 			{% for book in books %}
@@ -51,14 +65,14 @@
 		</div>
 		<center>
 		{% if previous > 0 %}
-			<a href="{% url 'book_list' previous %}" class="btn btn-secondary">Previous</a>
+			<a href="{% url 'book_list' previous sort %}" class="btn btn-secondary">Previous</a>
 		{% endif %}
 		{% for i in range %}
-			<a href="{% url 'book_list' forloop.counter %}" class="btn btn-secondary">{{ forloop.counter }}</a>
+			<a href="{% url 'book_list' forloop.counter sort %}" class="btn btn-secondary">{{ forloop.counter }}</a>
 		{% endfor %}
 		{% if currentpage != last %}
-			<a href="{% url 'book_list' next %}" class="btn btn-secondary">Next</a>
-			<a href="{% url 'book_list' last %}" class="btn btn-secondary">Last</a>
+			<a href="{% url 'book_list' next sort %}" class="btn btn-secondary">Next</a>
+			<a href="{% url 'book_list' last sort %}" class="btn btn-secondary">Last</a>
 		{% endif %}
 		</center>
 	{% else %}

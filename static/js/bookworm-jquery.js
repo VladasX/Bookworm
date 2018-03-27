@@ -1,4 +1,4 @@
-// JQuery code to be added in here.
+// JQuery code.
 
 // Used to pass book's title and description to a popup window.
 $('#book-modal').on('show.bs.modal', function (event) {
@@ -49,7 +49,7 @@ function status(n){
     return 0;
   }
 }
-var es = document.getElementsByClassName("stat");
+var es = document.getElementsByClassName("reading");
 for(i = 0; i < es.length; i++){
   es[i].innerHTML = status(parseInt(es[i].innerHTML));
 }

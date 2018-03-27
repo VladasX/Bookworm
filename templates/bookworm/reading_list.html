@@ -48,13 +48,13 @@
 				{% endif %}
 				<!-- Sets the badge depending on what the status of the book is. -->
 				{% if data.status == 0 %}
-					<th style="width:250px"><div class="col-7 stat badge-pill badge-primary">{{ data.status }}</div></th>
+					<th style="width:250px"><div class="col-7 stat badge-pill badge-primary reading">{{ data.status }}</div></th>
 				{% elif data.status == 1 %}
-					<th style="width:250px"><div class="col-7 stat badge-pill badge-success">{{ data.status }}</div></th>
+					<th style="width:250px"><div class="col-7 stat badge-pill badge-success reading">{{ data.status }}</div></th>
 				{% elif data.status == 2 %}
-					<th style="width:250px"><div class="col-7 stat badge-pill badge-warning">{{ data.status }}</div></th>
+					<th style="width:250px"><div class="col-7 stat badge-pill badge-warning reading">{{ data.status }}</div></th>
 				{% elif data.status == 3 %}
-					<th style="width:250px"><div class="col-7 stat badge-pill badge-danger">{{ data.status }}</div></th>
+					<th style="width:250px"><div class="col-7 stat badge-pill badge-danger reading">{{ data.status }}</div></th>
 				{% endif %}
 				{% if selecteduser.username == user.username %}
 						<!-- Allows them to change the status of the book. -->

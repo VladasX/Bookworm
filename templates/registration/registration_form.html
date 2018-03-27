@@ -13,6 +13,7 @@
 		{% csrf_token %}
 		<div class="form-group" >
 		<p class="required"><label class="required" for="id_username">Username:</label>
+			<div id="is_taken_label" style="max-width:150px;margin-bottom:15px;"></div>
 			<input class="form-control" id="id_username" maxlength="30" name="username" type="text" />
 			<span class="helptext">Required: 30 characters or fewer. Letters, digits and @/./+/-/_ only.</span>
 		</p>

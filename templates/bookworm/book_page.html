@@ -38,13 +38,13 @@
 			<a href="review/" class="btn btn-secondary">Write a review</a>
 			<!-- Displays user's reading list status for the book if one exists. -->
 			{% if status == 0 %}
-				<div class="col-7 stat badge-pill badge-primary" style="max-width:150px;margin-left:10px;display:block">{{ status }}</div>
+				<div class="col-7 stat badge-pill badge-primary reading" style="max-width:150px;margin-left:10px;display:block">{{ status }}</div>
 			{% elif status == 1 %}
-				<div class="col-7 stat badge-pill badge-success" style="max-width:130px;margin-left:10px;display:block">{{ status }}</div>
+				<div class="col-7 stat badge-pill badge-success reading" style="max-width:130px;margin-left:10px;display:block">{{ status }}</div>
 			{% elif status == 2 %}
-				<div class="col-7 stat badge-pill badge-warning" style="max-width:155px;margin-left:10px;display:block">{{ status }}</div>
+				<div class="col-7 stat badge-pill badge-warning reading" style="max-width:155px;margin-left:10px;display:block">{{ status }}</div>
 			{% elif status == 3 %}
-				<div class="col-7 stat badge-pill badge-danger" style="max-width:150px;margin-left:10px;display:block">{{ status }}</div>
+				<div class="col-7 stat badge-pill badge-danger reading" style="max-width:150px;margin-left:10px;display:block">{{ status }}</div>
 			{% endif %}
 			</div>
 			<br/><br/>

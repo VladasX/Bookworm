@@ -7,6 +7,7 @@ from django.contrib.auth.models import User
 from bookworm.books_api import search_query
 from bookworm.models import UserProfile, Book, Review, ReadingList
 from bookworm.forms import UserForm, UserProfileForm, ReviewForm, ReadingListForm, ReadingListFormChange
+from django.http import JsonResponse
 
 #Displays home page.
 def index(request):
@@ -115,7 +116,7 @@ def reading_list(request, username):
 	if reading_data:
 		return render(request, 'bookworm/reading_list.html', {'reading_data': reading_data, 'selecteduser': user})
 	return render(request, 'bookworm/reading_list.html', {'reading_data': {}, 'selecteduser': user})
-	
+
 #Displays a user's profile.
 def profile(request, username):
 	try:
@@ -154,3 +155,11 @@ def profile_edit(request, username):
 			return redirect('profile_edit', user.username)
 	return render(request, 'bookworm/profile_edit.html',
 		{'userprofile': userprofile, 'selecteduser': user, 'readingList': reading_data, 'form': form})
+
+#Used for an ajax call to see if a username is taken or not.
+def validate_username(request):
+    username = request.GET.get('username', None)
+    data = {
+        'is_taken': User.objects.filter(username__iexact=username).exists()
+    }
+    return JsonResponse(data)

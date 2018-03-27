@@ -32,18 +32,28 @@
 				<tr>
 				<th>
 					<span style="font-size:16px;">{{ data.book.title }}</span>
-					<span style="font-weight:normal;font-size:12px;margin-left:-4px">&nbsp;by {{ data.book.authors }}</span>
+					<!-- Checks if the book author is stored. -->
+					{% if data.book.authors %}
+						<span style="font-weight:normal;font-size:12px;margin-left:-4px">&nbsp;by {{ data.book.authors }}</span>
+					{% endif %}
 				</th>
-				<!-- Allows them to set how many pages they have read of the book if it's their reading list. -->
-				{% if selecteduser.username == user.username %}
-					<form role="form" method="post">
-						{% csrf_token %}
-					<th style="width:140px">
-						<input style="width:50px" type="number" name="pages" min="0" max={{ data.book.pageCount }} value={{ data.pagesread }}>/{{ data.book.pageCount }}
-					</th>
+				<!-- Checks if a page count is stored. -->
+				{% if data.book.pageCount %}
+					<!-- Allows them to set how many pages they have read of the book if it's their reading list. -->
+					{% if selecteduser.username == user.username %}
+						<form role="form" method="post">
+							{% csrf_token %}
+						<th style="width:140px">
+							<input style="width:50px" type="number" name="pages" min="0" max={{ data.book.pageCount }} value={{ data.pagesread }}>/{{ data.book.pageCount }}
+						</th>
+					{% else %}
+						<th>
+							{{ data.pagesread }}/{{ data.book.pageCount }}
+						</th>
+					{% endif %}
 				{% else %}
 					<th>
-						{{ data.pagesread }}/{{ data.book.pageCount }}
+					No page count.
 					</th>
 				{% endif %}
 				<!-- Sets the badge depending on what the status of the book is. -->

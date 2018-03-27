@@ -72,7 +72,7 @@
 	<div class="row">
 	{% for review in reviews %}
 		<div class="col-4">
-			<a href="/profile/{{ review.user.username }}">
+			<a href="{% url 'profile' review.user.username %}">
 			{% if review.user.userprofile.picture %}
 				<img style="float: left; width:100px;height:100px" src="{{ MEDIA_URL }}{{ review.user.userprofile.picture }}">
 			{% else %}

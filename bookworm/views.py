@@ -8,6 +8,7 @@ from bookworm.books_api import search_query
 from bookworm.models import UserProfile, Book, Review, ReadingList
 from bookworm.forms import UserForm, UserProfileForm, ReviewForm, ReadingListForm, ReadingListFormChange
 from django.http import JsonResponse
+from math import ceil
 
 #Displays home page.
 def index(request):
@@ -60,9 +61,14 @@ def book_page(request, bookid):
 	return render(request, 'bookworm/error.html')
 
 #Displays a list of books that are stored in the database.
-def book_list(request):
+def book_list(request, pages):
 	books = Book.objects.all()
-	return render(request, "bookworm/book_list.html", {'books': books})
+	start = (int(pages)-1)*12
+	next = int(pages)+1
+	previous = int(pages)-1
+	last = ceil(len(books)/12)
+	return render(request, "bookworm/book_list.html", 
+	{'books': books[start:start+12], 'range': range(ceil(len(books)/12)), 'next': next, 'previous': previous, 'last': last, 'currentpage': int(pages)})
 
 #Allows a user to add a review for a book.
 @login_required

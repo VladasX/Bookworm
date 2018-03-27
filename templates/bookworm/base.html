@@ -60,7 +60,7 @@
               <a class="nav-link" href="{% url 'index' %}">Home<span class="sr-only">(current)</span></a>
             </li>
             <li class="nav-item navbarmargin">
-              <a class="nav-link" href="{% url 'book_list' %}">Books</a>
+              <a class="nav-link" href="{% url 'book_list' 1 %}">Books</a>
             </li>
             <li class="nav-item navbarmargin">
               <a class="nav-link" href="{% url 'faq' %}">FAQ</a>
@@ -70,10 +70,10 @@
 			<li class="nav-item dropdown navbarmargin bg-dark">
 				<a class="nav-link dropdown-toggle bg-dark" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Account</a>
             <div class="dropdown-menu bg-dark">
-      				<a class="dropdown-item navbartext" href="/profile/{{ user.username }}">View your profile</a>
-      				<a class="dropdown-item navbartext" href="/profile_edit/{{ user.username }}">Edit your profile</a>
+      				<a class="dropdown-item navbartext" href="{% url 'profile' user.username %}">View your profile</a>
+      				<a class="dropdown-item navbartext" href="{% url 'profile_edit' user.username %}">Edit your profile</a>
       				<a class="dropdown-item navbartext" href="{% url 'auth_password_change' %}">Change your password</a>
-					<a class="dropdown-item navbartext" href="/reading_list/{{ user.username }}">Your reading list</a>
+					<a class="dropdown-item navbartext" href="{% url 'reading_list' user.username %}">Your reading list</a>
             </div>
 			</li>
             <li class="nav-item navbarmargin">

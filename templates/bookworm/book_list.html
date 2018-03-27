@@ -49,6 +49,18 @@
 			</div>
 			{% endfor %}
 		</div>
+		<center>
+		{% if previous > 0 %}
+			<a href="{% url 'book_list' previous %}" class="btn btn-secondary">Previous</a>
+		{% endif %}
+		{% for i in range %}
+			<a href="{% url 'book_list' forloop.counter %}" class="btn btn-secondary">{{ forloop.counter }}</a>
+		{% endfor %}
+		{% if currentpage != last %}
+			<a href="{% url 'book_list' next %}" class="btn btn-secondary">Next</a>
+			<a href="{% url 'book_list' last %}" class="btn btn-secondary">Last</a>
+		{% endif %}
+		</center>
 	{% else %}
 		No books have been added yet, please search for books to populate this list.
 	{% endif %}

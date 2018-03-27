@@ -96,6 +96,26 @@ def add_review(request, bookid):
 			print(form.errors)
 	return render(request, 'bookworm/add_review.html', {'form': form})
 
+#Allows to see the reading list of a person.
+def reading_list(request, username):
+	try:
+		user = User.objects.get(username=username)
+	except User.DoesNotExist:
+		return redirect('index')
+	reading_data = ReadingList.objects.filter(user=user)
+	if request.method == 'POST':
+				form = ReadingListFormChange(request.POST)
+				if form.is_valid():
+					bookid = form.cleaned_data['bookid']
+					book_data = Book.objects.get(bookid=bookid)
+					readinglist_data = ReadingList.objects.get(user=user, book=book_data)
+					readinglist_data.status = form.cleaned_data['status']
+					readinglist_data.pagesread = form.cleaned_data['pages']
+					readinglist_data.save()
+	if reading_data:
+		return render(request, 'bookworm/reading_list.html', {'reading_data': reading_data, 'selecteduser': user})
+	return render(request, 'bookworm/reading_list.html', {'reading_data': {}, 'selecteduser': user})
+	
 #Displays a user's profile.
 def profile(request, username):
 	try:
@@ -134,24 +154,3 @@ def profile_edit(request, username):
 			return redirect('profile_edit', user.username)
 	return render(request, 'bookworm/profile_edit.html',
 		{'userprofile': userprofile, 'selecteduser': user, 'readingList': reading_data, 'form': form})
-		
-		
-#Allows to see the reading list of a person.
-def reading_list(request, username):
-	try:
-		user = User.objects.get(username=username)
-	except User.DoesNotExist:
-		return redirect('index')
-	reading_data = ReadingList.objects.filter(user=user)
-	if request.method == 'POST':
-				form = ReadingListFormChange(request.POST)
-				if form.is_valid():
-					bookid = form.cleaned_data['bookid']
-					book_data = Book.objects.get(bookid=bookid)
-					readinglist_data = ReadingList.objects.get(user=user, book=book_data)
-					readinglist_data.status = form.cleaned_data['status']
-					readinglist_data.pagesread = form.cleaned_data['pages']
-					readinglist_data.save()
-	if reading_data:
-		return render(request, 'bookworm/reading_list.html', {'reading_data': reading_data, 'selecteduser': user})
-	return render(request, 'bookworm/reading_list.html', {'reading_data': {}, 'selecteduser': user})

@@ -32,7 +32,7 @@ class ReadingList(models.Model):
 	user = models.ForeignKey(User)
 	book = models.ForeignKey(Book)
 	status = models.IntegerField(default=0)
-	pagesread = models.IntegerField(default=0)
+	pagesread = models.IntegerField(default=0, null=True)
 	
 	def __str__(self):
 		return self.book.title

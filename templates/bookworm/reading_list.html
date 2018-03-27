@@ -37,12 +37,14 @@
 						<span style="font-weight:normal;font-size:12px;margin-left:-4px">&nbsp;by {{ data.book.authors }}</span>
 					{% endif %}
 				</th>
+				{% if selecteduser.username == user.username %}
+					<form role="form" method="post">
+						{% csrf_token %}
+				{% endif %}
 				<!-- Checks if a page count is stored. -->
 				{% if data.book.pageCount %}
 					<!-- Allows them to set how many pages they have read of the book if it's their reading list. -->
 					{% if selecteduser.username == user.username %}
-						<form role="form" method="post">
-							{% csrf_token %}
 						<th style="width:140px">
 							<input style="width:50px" type="number" name="pages" min="0" max={{ data.book.pageCount }} value={{ data.pagesread }}>/{{ data.book.pageCount }}
 						</th>

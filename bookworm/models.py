@@ -21,16 +21,16 @@ class Book(models.Model):
 
 #Model for reviews stored.
 class Review(models.Model):
-	user = models.ForeignKey(User)
-	book = models.ForeignKey(Book)
+	user = models.ForeignKey(User, on_delete=models.CASCADE)
+	book = models.ForeignKey(Book, on_delete=models.CASCADE)
 	text = models.TextField(max_length=4096, null=True)
 	timestamp = models.DateTimeField(auto_now=True)
 	rating = models.IntegerField(default=0)
 
 #Model for reading list.
 class ReadingList(models.Model):
-	user = models.ForeignKey(User)
-	book = models.ForeignKey(Book)
+	user = models.ForeignKey(User, on_delete=models.CASCADE)
+	book = models.ForeignKey(Book, on_delete=models.CASCADE)
 	status = models.IntegerField(default=0)
 	pagesread = models.IntegerField(default=0, null=True)
 	

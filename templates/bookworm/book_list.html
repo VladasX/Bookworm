@@ -8,7 +8,7 @@
 	<h1>Books
 		<div class="btn-group pull-right">
 			<button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
-				Sort by
+				Sorted by {{ sort.text }}
 			</button>
 			<ul class="dropdown-menu" role="menu">
 				<li><a href="{% url 'book_list' 1 'pageViews' %}">Views</a></li>
@@ -65,14 +65,14 @@
 		</div>
 		<center>
 		{% if previous > 0 %}
-			<a href="{% url 'book_list' previous sort %}" class="btn btn-secondary">Previous</a>
+			<a href="{% url 'book_list' previous sort.method %}" class="btn btn-secondary">Previous</a>
 		{% endif %}
 		{% for i in range %}
-			<a href="{% url 'book_list' forloop.counter sort %}" class="btn btn-secondary">{{ forloop.counter }}</a>
+			<a href="{% url 'book_list' forloop.counter sort.method %}" class="btn btn-secondary">{{ forloop.counter }}</a>
 		{% endfor %}
 		{% if currentpage != last %}
-			<a href="{% url 'book_list' next sort %}" class="btn btn-secondary">Next</a>
-			<a href="{% url 'book_list' last sort %}" class="btn btn-secondary">Last</a>
+			<a href="{% url 'book_list' next sort.method %}" class="btn btn-secondary">Next</a>
+			<a href="{% url 'book_list' last sort.method %}" class="btn btn-secondary">Last</a>
 		{% endif %}
 		</center>
 	{% else %}

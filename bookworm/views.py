@@ -58,22 +58,22 @@ def book_page(request, bookid):
 	return render(request, 'bookworm/error.html')
 
 #Displays a list of books that are stored in the database.
-def book_list(request, pages, sort=None):
-	if sort in ["title", "authors", "publishedDate", "averageRating", "pageCount", "pageViews"]:
-		# This will be sorted in alphabetical order.
-		if sort in ["title", "authors"]:
-			books = Book.objects.order_by(F("{}".format(sort)).asc(nulls_last=True))
-		# Everything numerical will be sorted in descending order.
-		else:
-			books = Book.objects.order_by(F("{}".format(sort)).desc(nulls_last=True))
+def book_list(request, pages=1, sort="pageViews"):
+	sortdic = {"title": "Title", "authors": "Authors", "publishedDate": "Published Date", "averageRating": "Average Rating", "pageCount": "Page Count", "pageViews": "Views"}
+	if sort not in sortdic.keys():
+		return render(request, "bookworm/error.html")
+	# This will be sorted in alphabetical order.
+	if sort in ["title", "authors"]:
+		books = Book.objects.order_by(F("{}".format(sort)).asc(nulls_last=True))
+	# Everything numerical will be sorted in descending order.
 	else:
-		books = Book.objects.all()
+		books = Book.objects.order_by(F("{}".format(sort)).desc(nulls_last=True))
 	start = (int(pages)-1)*12
 	next = int(pages)+1
 	previous = int(pages)-1
 	last = ceil(len(books)/12)
 	return render(request, "bookworm/book_list.html", 
-	{'books': books[start:start+12], 'range': range(ceil(len(books)/12)), 'next': next, 'previous': previous, 'last': last, 'currentpage': int(pages), 'sort': sort})
+	{'books': books[start:start+12], 'range': range(ceil(len(books)/12)), 'next': next, 'previous': previous, 'last': last, 'currentpage': int(pages), 'sort': {"method": sort, "text": sortdic[sort]}})
 
 #Allows a user to add a review for a book.
 @login_required

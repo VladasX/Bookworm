@@ -79,14 +79,14 @@ class IndexPageTests(TestCase):
 class BooksListPageTests(TestCase):
 	def test_no_books_in_database(self):
 		# Checks that a message is shown when there are no books in the database
-		response = self.client.get(reverse('book_list'))   
+		response = self.client.get(reverse('book_list', kwargs={'pages':1}))   
 		self.assertIn(b'No books have been added yet, please search for books to populate this list.', response.content)
 		
 	def test_books_shown(self):
 		# Creates a test book
 		test_book = create_test_book()
 		# Checks that books list shows a test book
-		response = self.client.get(reverse('book_list'))
+		response = self.client.get(reverse('book_list', kwargs={'pages':1}))
 		self.assertTrue(len(response.context['books']) > 0)
 		self.assertIn(b'Tango with Django', response.content)
 		
